@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
     "dayjs": "^1.11.13",
     "html2canvas": "^1.4.1",
     "install": "^0.13.0",

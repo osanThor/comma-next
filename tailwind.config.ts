@@ -48,5 +48,23 @@ export default {
       },
     },
   },
-  plugins: [],
+  variants: {
+    extend: {},
+  },
+  plugins: [
+    ({ addUtilities }: { addUtilities: any }) => {
+      addUtilities({
+        ".contents-box": {
+          "@apply flex flex-col items-center justify-center border-4 border-white bg-main-600/20 rounded-[30px] backdrop-blur-md":
+            "",
+        },
+        ".bg-size": {
+          "@apply w-full min-h-screen bg-cover bg-no-repeat": "",
+        },
+      });
+    },
+  ],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
 } satisfies Config;
