@@ -10,7 +10,7 @@ export const getGames = async () => {
   return data;
 };
 
-export const getGameByName = async (gameName) => {
+export const getGameByName = async (gameName: string) => {
   const { data, error } = await supabase
     .from("games")
     .select("*")
@@ -21,10 +21,15 @@ export const getGameByName = async (gameName) => {
   return data;
 };
 
-export const updateGameScore = async (gameId, userId, score, playTime) => {
+export const updateGameScore = async (
+  gameId: string,
+  userId: string,
+  score: number,
+  playTime: number
+) => {
   const { data: existingGameData, error: existingGameError } = await supabase
     .from("game_scores")
-    .select("score,total_play_time")
+    .select("score,play_time,total_play_time")
     .eq("game_id", gameId)
     .eq("user_id", userId)
     .single();
@@ -64,7 +69,7 @@ export const updateGameScore = async (gameId, userId, score, playTime) => {
   return renewal ? "new success" : "success";
 };
 
-export const getGameRanking = async (gameId, sortType = "desc") => {
+export const getGameRanking = async (gameId: string, sortType = "desc") => {
   const { data, error } = await supabase
     .from("game_scores")
     .select(
@@ -78,7 +83,7 @@ export const getGameRanking = async (gameId, sortType = "desc") => {
   return data.map((game, idx) => ({ ...game, rank: idx + 1 }));
 };
 
-export const getGameScoreByUser = async (userId, sortType = "desc") => {
+export const getGameScoreByUser = async (userId: string, sortType = "desc") => {
   const { data, error } = await supabase
     .from("game_scores")
     .select("*")

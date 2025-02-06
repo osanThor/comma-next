@@ -1,6 +1,26 @@
 import supabase from "@/lib/supabase/client";
 
-const formetSort = (value) => {
+type SortType = "dec" | "asc" | "likes" | "comments";
+
+interface InDefaultPost {
+  title: string;
+  content: string;
+  images: string[];
+}
+
+interface InPostBody extends InDefaultPost {
+  userId: string;
+  title: string;
+  category: string;
+  score: string | null;
+  playTime: string | null;
+}
+
+interface InPostPayload extends InDefaultPost {
+  postId: string;
+}
+
+const formetSort = (value: SortType) => {
   switch (value) {
     case "dec":
       return ["created_at", "desc"];
@@ -16,8 +36,8 @@ const formetSort = (value) => {
 };
 
 export const getPostsByCategory = async (
-  category = "free",
-  sort = "dec",
+  category: string = "free",
+  sort: SortType = "dec",
   page = 1,
   limit = 10,
   query = ""
@@ -49,8 +69,8 @@ export const getPostsByCategory = async (
 };
 
 export const getPostsByUserId = async (
-  userId,
-  sort = "dec",
+  userId: string,
+  sort: SortType = "dec",
   isComma = false,
   page = 1,
   limit = 10
@@ -82,8 +102,8 @@ export const getPostsByUserId = async (
 };
 
 export const getLikedPosts = async (
-  userId,
-  sort = "dec",
+  userId: string,
+  sort: SortType = "dec",
   isComma = false,
   page = 1,
   limit = 10
@@ -133,9 +153,9 @@ export const createPost = async ({
   category,
   content,
   images,
-  score, // string | null
-  playTime, // string | null
-}) => {
+  score,
+  playTime,
+}: InPostBody) => {
   const { data, error } = await supabase
     .from("posts")
     .insert([
@@ -144,8 +164,8 @@ export const createPost = async ({
         category,
         content,
         images,
-        user_id: userId,
         score,
+        user_id: userId,
         play_time: playTime,
       },
     ])
@@ -156,7 +176,12 @@ export const createPost = async ({
   return new Error("Create Post Fail");
 };
 
-export const updatePost = async ({ postId, title, content, images }) => {
+export const updatePost = async ({
+  postId,
+  title,
+  content,
+  images,
+}: InPostPayload) => {
   const { error } = await supabase
     .from("posts")
     .update({ title, content, images })
@@ -166,13 +191,13 @@ export const updatePost = async ({ postId, title, content, images }) => {
   return { postId, message: "success" };
 };
 
-export const deletePost = async (postId) => {
+export const deletePost = async (postId: string) => {
   const { error } = await supabase.from("posts").delete().eq("id", postId);
   if (error) throw error;
   return "success";
 };
 
-export const getPost = async (postId) => {
+export const getPost = async (postId: string) => {
   const { data, error } = await supabase
     .from("posts_with_counts")
     .select("*,user:user_id(id, name, email, profile_image)")

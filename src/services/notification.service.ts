@@ -1,13 +1,22 @@
 import supabase from "@/lib/supabase/client";
 
+interface InNotificationBody {
+  userId: string; // 받는 사람
+  senderId: string; // 보내는 사람
+  targetId?: string;
+  targetType?: "post" | "comment";
+  type?: "like" | "comment";
+  message: string;
+}
+
 export const createNotification = async ({
-  userId, // 받는 사람
-  senderId, // 보내는 사람
+  userId,
+  senderId,
   targetId,
-  targetType, // "post" | "comment"
-  type, // "like" | "comment"
+  targetType,
+  type,
   message,
-}) => {
+}: InNotificationBody) => {
   const { error } = await supabase.from("notifications").insert([
     {
       user_id: userId,
@@ -22,7 +31,16 @@ export const createNotification = async ({
   return "success";
 };
 
-export const realtimeNewNotifications = (userId, callback) => {
+export const realtimeNewNotifications = (
+  userId: string,
+  callback: (
+    payload:
+      | {}
+      | {
+          [key: string]: any;
+        }
+  ) => void
+) => {
   return supabase
     .channel("notifications")
     .on(
@@ -40,7 +58,7 @@ export const realtimeNewNotifications = (userId, callback) => {
     .subscribe();
 };
 
-export const getNotifications = async (userId) => {
+export const getNotifications = async (userId: string) => {
   const { data, error } = await supabase
     .from("notifications")
     .select("*,sender:sender_id(id,name,profile_image)")
@@ -51,7 +69,7 @@ export const getNotifications = async (userId) => {
   return data;
 };
 
-export const readNotification = async (notificationId) => {
+export const readNotification = async (notificationId: string) => {
   const { error } = await supabase
     .from("notifications")
     .update({ is_read: true })
@@ -61,7 +79,7 @@ export const readNotification = async (notificationId) => {
   return "success";
 };
 
-export const readAllNotifications = async (userId) => {
+export const readAllNotifications = async (userId: string) => {
   const { error } = await supabase
     .from("notifications")
     .update({ is_read: true })

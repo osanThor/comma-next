@@ -1,6 +1,6 @@
 import supabase from "@/lib/supabase/client";
 
-const formetSort = (value) => {
+const formetSort = (value: "desc" | "likes") => {
   switch (value) {
     case "desc":
       return ["created_at", "desc"];
@@ -12,8 +12,8 @@ const formetSort = (value) => {
 };
 
 export const getComments = async (
-  postId,
-  sort = "desc",
+  postId: string,
+  sort: "desc" | "likes" = "desc",
   page = 1,
   limit = 10
 ) => {
@@ -50,8 +50,8 @@ export const getComments = async (
 };
 
 export const getCommentsByUserId = async (
-  userId,
-  sort = "desc",
+  userId: string,
+  sort: "desc" | "likes" = "desc",
   page = 1,
   limit = 10
 ) => {
@@ -88,7 +88,15 @@ export const getCommentsByUserId = async (
   };
 };
 
-export const createComment = async ({ postId, content, userId }) => {
+export const createComment = async ({
+  postId,
+  content,
+  userId,
+}: {
+  postId: string;
+  content: string;
+  userId: string;
+}) => {
   const { error } = await supabase
     .from("comments")
     .insert([{ post_id: postId, content, user_id: userId }]);
@@ -96,7 +104,7 @@ export const createComment = async ({ postId, content, userId }) => {
   return "success";
 };
 
-export const deleteComment = async (commentId) => {
+export const deleteComment = async (commentId: string) => {
   const { error } = await supabase
     .from("comments")
     .delete()

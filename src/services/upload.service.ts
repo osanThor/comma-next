@@ -1,8 +1,8 @@
 import supabase from "@/lib/supabase/client";
 
-const ASCIIFileName = (name) => {
-  const extension = name.split('.').pop(); 
-  const baseName = name.replace(/\.[^/.]+$/, ""); 
+const ASCIIFileName = (name: string) => {
+  const extension = name.split(".").pop();
+  const baseName = name.replace(/\.[^/.]+$/, "");
   const ASCIIdBaseName = baseName
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
@@ -10,7 +10,7 @@ const ASCIIFileName = (name) => {
   return `${ASCIIdBaseName}-${Date.now()}.${extension}`;
 };
 
-export const uploadImage = async (file, bucketName = "images") => {
+export const uploadImage = async (file: File, bucketName = "images") => {
   if (!(file instanceof File)) {
     throw new Error("유효하지 않은 파일 형식입니다.");
   }
@@ -27,13 +27,7 @@ export const uploadImage = async (file, bucketName = "images") => {
     throw new Error(error.message);
   }
 
-  const { data, error: urlError } = supabase.storage
-    .from(bucketName)
-    .getPublicUrl(fileName);
+  const { data } = supabase.storage.from(bucketName).getPublicUrl(fileName);
 
-  if (urlError) {
-    throw new Error(urlError.message);
-  }
-
-  return data.publicUrl;
+  return data.publicUrl || "";
 };

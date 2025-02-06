@@ -1,6 +1,12 @@
 import supabase from "@/lib/supabase/client";
 
-const filterData = ({ userId, targetId, targetType }) => {
+interface InLikeBody {
+  userId: string;
+  targetId: string;
+  targetType: "post" | "comment";
+}
+
+const filterData = ({ userId, targetId, targetType }: InLikeBody) => {
   if (!["post", "comment"].includes(targetType)) {
     throw new Error("Invalid targetType. Must be 'post' or 'comment'.");
   }
@@ -11,7 +17,7 @@ const filterData = ({ userId, targetId, targetType }) => {
   };
 };
 
-export const checkLike = async (params) => {
+export const checkLike = async (params: InLikeBody) => {
   const filter = filterData(params);
 
   const { data, error } = await supabase
@@ -24,7 +30,7 @@ export const checkLike = async (params) => {
   return data.length > 0;
 };
 
-export const addLike = async (body) => {
+export const addLike = async (body: InLikeBody) => {
   const filter = filterData(body);
 
   const { error } = await supabase //
@@ -36,7 +42,7 @@ export const addLike = async (body) => {
   return "success";
 };
 
-export const removeLike = async (body) => {
+export const removeLike = async (body: InLikeBody) => {
   const filter = filterData(body);
   const { error } = await supabase //
     .from("likes")
