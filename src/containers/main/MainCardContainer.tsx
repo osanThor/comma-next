@@ -166,10 +166,12 @@ export default function MainCardContainer() {
               )}
             >
               <div className="w-full flex h-full bg-point-500 rounded-3xl overflow-hidden relative flex-col items-center">
-                <img
+                <Image
                   className="w-full h-full object-cover"
                   src={`/assets/images/bg/main/main-card-${game.name}.jpg`}
                   alt={`main-card-${game.name}`}
+                  fill
+                  sizes="354px"
                 />
                 <h2 className="text-white absolute text-[50px] text-center top-[60px] leading-[45px]">
                   {DISPLAY_NAME[game.name]}

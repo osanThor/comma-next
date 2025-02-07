@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const MEMBERS = [
@@ -29,10 +30,12 @@ export default function Footer() {
         <div className="py-8">
           <div className="flex items-center justify-center">
             <div className="opacity-80 hover:opacity-100 transition-opacity">
-              <img
+              <Image
                 src="/assets/images/logo.png"
                 alt="Project Logo"
                 className="h-4 w-auto"
+                width={66}
+                height={16}
               />
             </div>
             <div className="flex items-center pl-8">

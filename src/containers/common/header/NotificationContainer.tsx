@@ -6,13 +6,13 @@ import {
   readAllNotifications,
 } from "@/services/notification.service";
 import { twMerge } from "tailwind-merge";
-import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/authStore";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { NotificationType } from "@/types/notification";
 import Avatar from "@/components/common/Avatar";
 import formatedDate from "@/utils/formatedDate";
+import Image from "next/image";
 
 export default function NotificationContainer() {
   const router = useRouter();
@@ -40,7 +40,7 @@ export default function NotificationContainer() {
     return isAll ? items : items.filter((item) => !item.is_read);
   }, [isAll, items]);
 
-  const handleClickButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClickButton = () => {
     if (menuRef.current) {
       setOpen(false);
     } else {
@@ -110,10 +110,12 @@ export default function NotificationContainer() {
             <span className="relative inline-flex rounded-full h-3 w-3 bg-point-500"></span>
           </span>
         )}
-        <img
+        <Image
           className="w-[24px] relative -z-[11]"
           src="/assets/images/icons/alarm-icon.svg"
           alt="알림"
+          width={24}
+          height={28}
         />
       </button>
       {open && (

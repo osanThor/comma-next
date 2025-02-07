@@ -1,5 +1,4 @@
 "use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import PaginArrow from "./icons/PaginArrow";

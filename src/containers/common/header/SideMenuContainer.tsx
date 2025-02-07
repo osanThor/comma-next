@@ -24,7 +24,7 @@ export default function SideMenuContainer() {
     await getGamesData();
   };
 
-  const handleClickButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClickButton = () => {
     if (menuRef.current) {
       setOpen(false);
     } else {
