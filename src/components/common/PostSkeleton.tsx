@@ -13,20 +13,20 @@ export default function PostSkeleton({ length }: { length: number }) {
             </div>
             <div className="p-4 bg-main-500 flex-grow flex flex-col">
               <div className="flex gap-2 items-end mb-3 justify-between">
-                <div className="animate-pulse rounded w-20 h-5 bg-main-200 opacity-70" />
-                <div className="animate-pulse rounded w-14 h-4 bg-main-200" />
+                <div className="w-20 h-5 skeleton" />
+                <div className="w-14 h-4 skeleton" />
               </div>
               <div className="mb-3 flex flex-col gap-1 flex-grow">
-                <div className="animate-pulse rounded w-full h-3 bg-main-200 opacity-70" />
-                <div className="animate-pulse rounded w-full h-3 bg-main-200 opacity-70" />
+                <div className="w-full h-3 skeleton" />
+                <div className="w-full h-3 skeleton" />
               </div>
               <div className="w-full flex justify-between items-center">
                 <div className="text-xs flex items-center gap-1">
                   <div className="animate-pulse w-[18px] h-[18px] rounded-full opacity-70 bg-main-200" />
-                  <div className="animate-pulse rounded w-16 h-3 bg-main-200 opacity-70" />
+                  <div className="w-16 h-3 skeleton" />
                 </div>
                 <div className="text-[10px] leading-3 flex items-center gap-1 text-point-500">
-                  <div className="animate-pulse rounded w-16 h-3 bg-main-200 opacity-70" />
+                  <div className="w-16 h-3 skeleton" />
                 </div>
               </div>
             </div>

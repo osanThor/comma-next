@@ -1,4 +1,5 @@
 import { USER_NAV_MENUS } from "@/constants/user";
+import UserRootContainer from "@/containers/user/UserRootContainer";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
@@ -9,7 +10,7 @@ type Props = {
 };
 
 export default async function UserPage({ params }: Props) {
-  const { slug } = await params;
+  const slug = (await params).slug;
   const userId = slug[0];
   const path = slug[1];
   if (!path) redirect(`/user/${userId}/post`);
@@ -35,7 +36,7 @@ export default async function UserPage({ params }: Props) {
           </div>
         </div>
         <div className="w-full flex flex-col">
-          {/* <router-view :user="user" :user-id="userId"></router-view> */}
+          <UserRootContainer userId={userId} path={path} />
         </div>
       </div>
       <Image

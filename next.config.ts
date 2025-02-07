@@ -26,7 +26,8 @@ const nextConfig: NextConfig = {
         hostname: "lh3.googleusercontent.com",
       },
     ],
-    domains: [],
+    minimumCacheTTL: 86400,
+    formats: ["image/avif", "image/webp"],
   },
 };
 

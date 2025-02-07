@@ -1,5 +1,16 @@
 import supabase from "@/lib/supabase/client";
 
+export type GameScoreSchema = {
+  id: string;
+  user_id: string;
+  game_id: string;
+  score: number;
+  play_time: number;
+  total_play_time: number;
+  create_at: string;
+  updated_at: string | null;
+};
+
 export const getGames = async () => {
   const { data, error } = await supabase
     .from("games")
@@ -83,7 +94,10 @@ export const getGameRanking = async (gameId: string, sortType = "desc") => {
   return data.map((game, idx) => ({ ...game, rank: idx + 1 }));
 };
 
-export const getGameScoreByUser = async (userId: string, sortType = "desc") => {
+export const getGameScoreByUser = async (
+  userId: string,
+  sortType = "desc"
+): Promise<GameScoreSchema[]> => {
   const { data, error } = await supabase
     .from("game_scores")
     .select("*")
