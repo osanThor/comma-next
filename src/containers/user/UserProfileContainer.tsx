@@ -7,11 +7,12 @@ import {
   getGameScoreByUser,
 } from "@/services/game.service";
 import { useAuthStore } from "@/stores/authStore";
+import { useGameStore } from "@/stores/gameStore";
 import { UserType } from "@/types/auth";
 import formatedTime from "@/utils/formatedTime";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 
 type Props = {
   user: UserType;
@@ -21,55 +22,25 @@ type Props = {
 export default function UserProfileContainer({ user, userId }: Props) {
   const currentUser = useAuthStore((state) => state.user);
 
-  const [userGames, setUserGames] = useState<GameScoreSchema[]>([]);
-  const [playTime, setPlayTime] = useState<number>(0);
+  const userGames = useGameStore((state) => state.userGames);
+  const playTime = useGameStore((state) => state.playTime);
+  const getUserGameScores = useGameStore((state) => state.getUserGameScores);
+  const getRankings = useGameStore((state) => state.getRankings);
 
   const bio = user
     ? user.bio
     : "아직 자기소개를 작성하지 않으셨습니다. 자기소개를 작성해주세요";
 
-  const fetchGameScores = useCallback(async () => {
-    try {
-      const data = await getGameScoreByUser(userId);
-      if (data) {
-        setUserGames(data);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }, [userId]);
+  useEffect(() => {
+    getUserGameScores(userId);
+  }, [getUserGameScores]);
 
   useEffect(() => {
-    fetchGameScores();
-  }, [fetchGameScores]);
-
-  const fetchRankings = useCallback(async () => {
-    if (userGames.length === 0) return;
-
-    try {
-      const data = await Promise.all(
-        userGames.map((game) => getGameRanking(game.game_id))
-      );
-      const ranks = data.map((rankingArr) =>
-        rankingArr.find((ranking) => ranking.user_id === userId)
-      );
-
-      const totalPlayTime = ranks.reduce((acc, rank) => {
-        return acc + (rank?.total_play_time || 0);
-      }, 0);
-
-      setPlayTime(totalPlayTime);
-    } catch (err) {
-      console.error(err);
-    }
-  }, [userGames, userId]);
-
-  useEffect(() => {
-    fetchRankings();
-  }, [userGames, fetchRankings]);
+    getRankings(userId);
+  }, [userGames, getRankings]);
 
   return (
-    <div className="flex flex-col sm:flex-row items-center mb-16">
+    <div className="flex flex-col sm:flex-row justify-center md:justify-start items-center mb-16">
       <div className="relative mr-5 md:mr-[78px]">
         {user ? (
           <Avatar src={user.profile_image} size="xl" />

@@ -5,7 +5,6 @@ import PostSkeleton from "@/components/common/PostSkeleton";
 import UserPostsTags from "@/components/user/UserPostsTags";
 import useUserPosts from "@/hooks/userPosts";
 import { useState } from "react";
-import { twMerge } from "tailwind-merge";
 
 type Props = {
   userId: string;
