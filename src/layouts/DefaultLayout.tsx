@@ -15,7 +15,7 @@ export default function DefaultLayout({ children }: Props) {
 
   useEffect(() => {
     if (!isLoggedIn()) redirect("/login");
-  }, [user]);
+  }, [user, isLoggedIn]);
 
   return (
     <div className="bg-size font-pretendard font-medium bg-main pt-">

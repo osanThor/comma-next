@@ -66,6 +66,9 @@ export default {
         ".main-swiper": {
           "@apply !overflow-visible": "",
         },
+        ".skeleton": {
+          "@apply animate-pulse rounded bg-main-200 opacity-70": "",
+        },
       });
     },
   ],

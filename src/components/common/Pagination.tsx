@@ -34,7 +34,7 @@ export default function Pagination({
     const slicedPageArray = sliceArrayByLimit(totalPages, limit);
     const pageIndex = Math.floor((page - 1) / limit);
     setCurrentPageArray(slicedPageArray[pageIndex] || []);
-  }, [totalPages, page]);
+  }, [totalPages, page, limit]);
 
   return (
     <>

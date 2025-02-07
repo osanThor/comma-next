@@ -1,19 +1,18 @@
 "use client";
 
-import Filter from "@/components/common/Filter";
+import Filter, { SortOptionsType } from "@/components/common/Filter";
 import Pagination from "@/components/common/Pagination";
 import PostItem from "@/components/common/PostItem";
 import PostSkeleton from "@/components/common/PostSkeleton";
 import TitleLeft from "@/components/common/icons/TitleLeft";
 import TitleRight from "@/components/common/icons/TitleRight";
 import usePosts from "@/hooks/posts";
-import { SortType } from "@/services/post.service";
 import Link from "next/link";
 
 const SORT_OPTIONS = [
   { name: "인기순", value: "likes" },
   { name: "최신순", value: "desc" },
-] as { name: string; value: SortType }[];
+] as SortOptionsType[];
 
 export default function MainCommunityContainer() {
   const { posts, isLoading, page, chanagePage, sort, changeSort } = usePosts(
@@ -36,24 +35,19 @@ export default function MainCommunityContainer() {
         글 쓰러 가기
       </Link>
       <div className="w-[calc(100%-40px)] max-w-[970px] flex flex-col">
-        <div className="w-full flex items-center justify-end mb-5">
+        <div className="w-full flex items-center justify-end ">
           <Filter sort={sort} sortOption={SORT_OPTIONS} onChange={changeSort} />
-          {/* <base-filter
-        :sort="sort"
-        :sortOption="sortOption"
-        @change-sort="handleChangeSort"
-      ></base-filter> */}
         </div>
         {isLoading ? (
-          <div className="grid grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px]">
+          <div className="grid grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-5">
             <PostSkeleton length={12} />
           </div>
         ) : posts?.data.length === 0 ? (
-          <div className="w-full flex items-center justify-center py-[200px] text-white/50 text-2xl font-bold">
+          <div className="w-full flex items-center justify-center py-[200px] mt-5 text-white/50 text-2xl font-bold">
             포스트가 존재하지 않습니다.
           </div>
         ) : (
-          <div className="grid grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-5">
             {posts?.data.map((item) => (
               <PostItem key={item.id} item={item} />
             ))}

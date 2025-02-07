@@ -91,7 +91,7 @@ export const getPostsByUserId = async (
   isComma = false,
   page = 1,
   limit = 10
-) => {
+): Promise<{ data: PostSchema[]; totalCount: number }> => {
   const { count, error: countError } = await supabase
     .from("posts_with_counts")
     .select("id", { count: "exact" })
@@ -115,7 +115,7 @@ export const getPostsByUserId = async (
 
   if (error) throw error;
 
-  return { data: data || [], totalCount: count };
+  return { data: data || [], totalCount: count || 0 };
 };
 
 export const getLikedPosts = async (
@@ -124,7 +124,7 @@ export const getLikedPosts = async (
   isComma = false,
   page = 1,
   limit = 10
-) => {
+): Promise<{ data: PostSchema[]; totalCount: number }> => {
   const { data: likedPost, error: likedPostError } = await supabase
     .from("likes")
     .select("post_id")
@@ -161,7 +161,7 @@ export const getLikedPosts = async (
 
   if (error) throw error;
 
-  return { data: data || [], totalCount: count };
+  return { data: data || [], totalCount: count || 0 };
 };
 
 export const createPost = async ({

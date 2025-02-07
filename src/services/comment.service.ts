@@ -1,4 +1,18 @@
 import supabase from "@/lib/supabase/client";
+import { UserType } from "@/types/auth";
+import { PostSchema } from "./post.service";
+
+export type CommentSchema = {
+  id: string;
+  post_id: string;
+  user_id: string;
+  content: string;
+  created_at: string;
+  updated_at: string | null;
+  like_count: number;
+  user: UserType;
+  post: PostSchema;
+};
 
 const formetSort = (value: "desc" | "likes") => {
   switch (value) {
@@ -54,7 +68,7 @@ export const getCommentsByUserId = async (
   sort: "desc" | "likes" = "desc",
   page = 1,
   limit = 10
-) => {
+): Promise<{ data: CommentSchema[]; totalCount: number }> => {
   const { count, error: countError } = await supabase
     .from("comments_with_counts")
     .select("id", { count: "exact" })
@@ -84,7 +98,7 @@ export const getCommentsByUserId = async (
 
   return {
     data,
-    totalCount: count,
+    totalCount: count || 0,
   };
 };
 
