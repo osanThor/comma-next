@@ -9,8 +9,10 @@ interface InGame {
   display_name: string;
 }
 
-interface InRanker extends UserType {
+interface InRanker {
   game: InGame;
+  user: UserType;
+  score: number;
 }
 
 interface InGameStore {

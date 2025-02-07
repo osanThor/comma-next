@@ -3,6 +3,7 @@ import KakaoIcon from "@/components/common/icons/KakaoIcon";
 import { loginWithSocial } from "@/services/user.service";
 import { useAuthStore } from "@/stores/authStore";
 import { useToastStore } from "@/stores/toastStore";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -42,10 +43,12 @@ export default function LoginContainer() {
         onClick={googleLogin}
       >
         <span className="flex items-center justify-center w-6 h-6 mr-2">
-          <img
+          <Image
             className="object-cover w-5"
             src="/assets/images/icons/google-icon.svg"
             alt="google icon"
+            width={20}
+            height={20}
           />
         </span>
         Google로 시작하기

@@ -1,6 +1,7 @@
-export default function TitleLeft() {
+export default function TitleLeft({ className }: { className: string }) {
   return (
     <svg
+      className={className}
       width="181"
       height="36"
       viewBox="0 0 181 36"
