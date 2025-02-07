@@ -3,9 +3,11 @@ import { useMemo, useState } from "react";
 import FilterArrow from "./icons/FilterArrow";
 import { twMerge } from "tailwind-merge";
 
+export type SortOptionsType = { name: string; value: SortType };
+
 type Props = {
   sort: SortType;
-  sortOption: { name: string; value: SortType }[];
+  sortOption: SortOptionsType[];
   onChange: (sort: SortType) => void;
 };
 export default function Filter({ sort = "desc", sortOption, onChange }: Props) {
@@ -14,11 +16,11 @@ export default function Filter({ sort = "desc", sortOption, onChange }: Props) {
   const currentSort = useMemo(() => {
     const matchedOption = sortOption.find((option) => option.value === sort);
     return matchedOption ? matchedOption.name : "인기순";
-  }, [sort]);
+  }, [sort, sortOption]);
 
   const otherSortOptions = useMemo(
     () => sortOption.filter((option) => option.value !== sort),
-    [sort]
+    [sort, sortOption]
   );
 
   const handleToggleOpen = () => {
@@ -47,10 +49,8 @@ export default function Filter({ sort = "desc", sortOption, onChange }: Props) {
         {otherSortOptions.map((opts) => (
           <div
             onClick={() => handleChangeSort(opts.value)}
-            className={twMerge(
-              "transition-all overflow-hidden",
-              open ? "h-9" : "h-0"
-            )}
+            className={twMerge("transition-all overflow-hidden")}
+            style={{ height: open ? otherSortOptions.length * 36 : 0 }}
             key={opts.value}
           >
             <div className="flex items-center h-9 pl-10 pr-3 relative cursor-pointer font-semibold opacity-70 hover:opacity-100">

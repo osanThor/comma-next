@@ -22,7 +22,7 @@ export default function LoginContainer() {
       router.push("/");
       addToast("로그인 성공! 어서오세요.");
     }
-  }, [user]);
+  }, [user, addToast, router]);
   return (
     <div className="w-full max-w-[299px] flex flex-col gap-5">
       <button
