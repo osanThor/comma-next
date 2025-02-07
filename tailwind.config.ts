@@ -63,6 +63,9 @@ export default {
         ".bg-size": {
           "@apply w-full min-h-screen bg-cover bg-no-repeat": "",
         },
+        ".main-swiper": {
+          "@apply !overflow-visible": "",
+        },
       });
     },
   ],
