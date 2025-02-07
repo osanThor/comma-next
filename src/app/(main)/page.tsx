@@ -1,4 +1,5 @@
 import MainCardContainer from "@/containers/main/MainCardContainer";
+import MainGameCommunityContainer from "@/containers/main/MainGameCommunityContainer";
 import MainMarqueeContainer from "@/containers/main/MainMarqueeContainer";
 import Image from "next/image";
 
@@ -34,6 +35,7 @@ export default function Home() {
         </div>
         <MainMarqueeContainer />
       </section>
+      <MainGameCommunityContainer />
     </>
   );
 }

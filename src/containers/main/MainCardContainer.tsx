@@ -92,7 +92,6 @@ export default function MainCardContainer() {
     } else if (event.keyCode === 39) {
       swiperRef.current.slideNext();
     } else if (event.keyCode === 32 || event.keyCode === 38) {
-      console.log(targetIdx, activeIndex);
       setTargetIdx(targetIdx === activeIndex ? null : activeIndex);
     }
   };

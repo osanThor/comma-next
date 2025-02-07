@@ -1,6 +1,6 @@
 import supabase from "@/lib/supabase/client";
 
-type SortType = "dec" | "asc" | "likes" | "comments";
+type SortType = "desc" | "asc" | "likes" | "comments";
 
 interface InDefaultPost {
   title: string;
@@ -22,7 +22,7 @@ interface InPostPayload extends InDefaultPost {
 
 const formetSort = (value: SortType) => {
   switch (value) {
-    case "dec":
+    case "desc":
       return ["created_at", "desc"];
     case "asc":
       return ["created_at", "asc"];
@@ -37,7 +37,7 @@ const formetSort = (value: SortType) => {
 
 export const getPostsByCategory = async (
   category: string = "free",
-  sort: SortType = "dec",
+  sort: SortType = "desc",
   page = 1,
   limit = 10,
   query = ""
@@ -70,7 +70,7 @@ export const getPostsByCategory = async (
 
 export const getPostsByUserId = async (
   userId: string,
-  sort: SortType = "dec",
+  sort: SortType = "desc",
   isComma = false,
   page = 1,
   limit = 10
@@ -103,7 +103,7 @@ export const getPostsByUserId = async (
 
 export const getLikedPosts = async (
   userId: string,
-  sort: SortType = "dec",
+  sort: SortType = "desc",
   isComma = false,
   page = 1,
   limit = 10

@@ -12,6 +12,7 @@ interface InGame {
 interface InRanker {
   game: InGame;
   user: UserType;
+  score: number;
 }
 
 interface InGameStore {
