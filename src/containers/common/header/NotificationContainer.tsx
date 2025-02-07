@@ -12,6 +12,7 @@ import { useAuthStore } from "@/stores/authStore";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { NotificationType } from "@/types/notification";
 import Avatar from "@/components/common/Avatar";
+import formatedDate from "@/utils/formatedDate";
 
 export default function NotificationContainer() {
   const router = useRouter();
@@ -62,10 +63,6 @@ export default function NotificationContainer() {
     router.push(handler);
     setOpen(false);
     await readNotification(targetId);
-  };
-
-  const formatDate = (dateString: string) => {
-    return dayjs(dateString).format("YYYY.MM.DD");
   };
 
   useEffect(() => {
@@ -172,7 +169,7 @@ export default function NotificationContainer() {
                           {item.message} <span className="ml-1"></span>
                         </div>
                         <span className="text-xs opacity-70">
-                          {formatDate(item.created_at)}
+                          {formatedDate(item.created_at)}
                         </span>
                       </div>
                     </li>

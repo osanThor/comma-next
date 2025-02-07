@@ -1,6 +1,7 @@
-export default function PaginArrow() {
+export default function PaginArrow({ className }: { className?: string }) {
   return (
     <svg
+      className={className}
       width="8"
       height="16"
       viewBox="0 0 8 16"

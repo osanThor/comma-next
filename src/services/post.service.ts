@@ -1,6 +1,23 @@
 import supabase from "@/lib/supabase/client";
+import { UserType } from "@/types/auth";
 
-type SortType = "desc" | "asc" | "likes" | "comments";
+export type SortType = "desc" | "asc" | "likes" | "comments";
+
+export type PostSchema = {
+  id: string;
+  user_id: string;
+  title: string;
+  content: string;
+  created_at: string;
+  updated_at: string | null;
+  images: string[];
+  category: string; // 'free' | 만들 게임이름들...
+  like_count: number;
+  comment_count: number;
+  user: UserType;
+  score?: string; //
+  play_time?: string; //
+};
 
 interface InDefaultPost {
   title: string;
@@ -41,7 +58,7 @@ export const getPostsByCategory = async (
   page = 1,
   limit = 10,
   query = ""
-) => {
+): Promise<{ data: PostSchema[]; totalCount: number }> => {
   const { count, error: countError } = await supabase
     .from("posts_with_counts")
     .select("id", { count: "exact" })
@@ -65,7 +82,7 @@ export const getPostsByCategory = async (
 
   if (error) throw error;
 
-  return { data: data || [], totalCount: count };
+  return { data: data || [], totalCount: count || 0 };
 };
 
 export const getPostsByUserId = async (
