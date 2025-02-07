@@ -1,12 +1,8 @@
 "use client";
 
-import {
-  CommentSchema,
-  deleteComment,
-  getCommentsByUserId,
-} from "@/services/comment.service";
+import { CommentSchema, getCommentsByUserId } from "@/services/comment.service";
 import { SortType } from "@/services/post.service";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import useSWR from "swr";
 
 const getComments = async (

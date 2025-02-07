@@ -1,11 +1,6 @@
 "use client";
 
 import Avatar from "@/components/common/Avatar";
-import {
-  GameScoreSchema,
-  getGameRanking,
-  getGameScoreByUser,
-} from "@/services/game.service";
 import { useAuthStore } from "@/stores/authStore";
 import { useGameStore } from "@/stores/gameStore";
 import { UserType } from "@/types/auth";

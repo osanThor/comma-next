@@ -2,9 +2,7 @@
 
 import { getUserById } from "@/services/user.service";
 import { useToastStore } from "@/stores/toastStore";
-import { UserType } from "@/types/auth";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import useSWR from "swr";
 import UserProfileContainer from "./UserProfileContainer";
 import UserPostContaienr from "./UserPostContaienr";

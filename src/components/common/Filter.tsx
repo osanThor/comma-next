@@ -16,11 +16,11 @@ export default function Filter({ sort = "desc", sortOption, onChange }: Props) {
   const currentSort = useMemo(() => {
     const matchedOption = sortOption.find((option) => option.value === sort);
     return matchedOption ? matchedOption.name : "인기순";
-  }, [sort]);
+  }, [sort, sortOption]);
 
   const otherSortOptions = useMemo(
     () => sortOption.filter((option) => option.value !== sort),
-    [sort]
+    [sort, sortOption]
   );
 
   const handleToggleOpen = () => {
