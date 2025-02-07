@@ -27,9 +27,10 @@ export default function UserProfileContainer({ user, userId }: Props) {
   const getUserGameScores = useGameStore((state) => state.getUserGameScores);
   const getRankings = useGameStore((state) => state.getRankings);
 
-  const bio = user
-    ? user.bio
-    : "아직 자기소개를 작성하지 않으셨습니다. 자기소개를 작성해주세요";
+  const bio =
+    user && user.bio
+      ? user.bio
+      : "아직 자기소개를 작성하지 않으셨습니다. 자기소개를 작성해주세요";
 
   useEffect(() => {
     getUserGameScores(userId);

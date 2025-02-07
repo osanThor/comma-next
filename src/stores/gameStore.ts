@@ -20,8 +20,9 @@ interface InRanker {
   score: number;
 }
 
-interface InUserRank extends GameScoreSchema {
+export interface InUserRank extends GameScoreSchema {
   rank: number;
+  game: InGame;
 }
 
 interface InGameStore {
@@ -108,10 +109,10 @@ export const useGameStore = create(
           console.error(err);
         }
       },
+
       getRankings: async (userId: string) => {
         const { userGames } = get();
         if (userGames.length === 0) return;
-
         try {
           const data = await Promise.all(
             userGames.map((game) => getGameRanking(game.game_id))
@@ -119,7 +120,6 @@ export const useGameStore = create(
           const ranks = data.map((rankingArr) =>
             rankingArr.find((ranking) => ranking.user_id === userId)
           );
-
           set({ rankings: ranks });
 
           const totalPlayTime = ranks.reduce((acc, rank) => {
