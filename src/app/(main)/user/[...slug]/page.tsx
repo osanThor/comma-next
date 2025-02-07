@@ -17,16 +17,16 @@ export default async function UserPage({ params }: Props) {
   if (!USER_NAV_MENUS.map((menu) => menu.value).includes(path)) notFound();
 
   return (
-    <section className="w-[calc(100%-40px)] max-w-[1640px] min-h-[calc(100vh-140px)] mt-[100px] flex flex-col contents-box py-[90px] mb-10 px-10 lg:px-20">
-      <div className="flex w-full h-full flex-grow gap-[7vw]">
-        <div className="min-w-[212px] border-white/70 border-r-2 flex flex-col relative">
-          <div className="w-full flex flex-col gap-7 sticky top-[100px] left-0">
+    <section className="w-[calc(100%-40px)] max-w-[1640px] min-h-[calc(100vh-140px)] mt-[100px] flex flex-col contents-box py-5 md:py-[90px] mb-10 px-4 md:px-10 lg:px-20">
+      <div className="flex flex-col md:flex-row w-full h-full flex-grow gap-[7vw]">
+        <div className="min-w-[212px] border-white/70 border-b md:border-b-0 md:border-r-2 flex flex-col relative">
+          <div className="w-full flex justify-center md:justify-start md:flex-col gap-7 sticky top-[100px] left-0">
             {USER_NAV_MENUS.map((menu) => (
               <Link
                 key={menu.value}
                 href={`/user/${userId}/${menu.value}`}
                 className={twMerge(
-                  "block text-white hover:text-point-500 text-xl font-bold transition-all",
+                  "block text-white hover:text-point-500 py-4 md:py-0 md:text-xl font-bold transition-all",
                   path === menu.value && "text-point-500"
                 )}
               >

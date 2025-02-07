@@ -2,8 +2,8 @@ import Filter, { SortOptionsType } from "@/components/common/Filter";
 import Pagination from "@/components/common/Pagination";
 import PostItem from "@/components/common/PostItem";
 import PostSkeleton from "@/components/common/PostSkeleton";
+import UserPostsTags from "@/components/user/UserPostsTags";
 import useUserPosts from "@/hooks/userPosts";
-import { SortType } from "@/services/post.service";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -29,32 +29,11 @@ export default function UserPostContaienr({ userId }: Props) {
 
   return (
     <div>
-      <div className="w-full flex justify-between items-center">
-        <div className="flex items-center gap-4">
-          <button
-            className={twMerge(
-              "text-lg font-bold text-white px-7 pb-4 border-b-4 border-point-500 hover:text-point-500 hover:!border-opacity-100",
-              tag === "game"
-                ? "text-point-500 !border-opacity-100"
-                : "!border-opacity-0"
-            )}
-            onClick={() => handleClickTag("game")}
-          >
-            GAME
-          </button>
-          <button
-            className={twMerge(
-              "text-lg font-bold text-white px-7 pb-4 border-b-4 border-point-500 hover:text-point-500 hover:!border-opacity-100",
-              tag === "comma"
-                ? "text-point-500 !border-opacity-100"
-                : "!border-opacity-0"
-            )}
-            onClick={() => handleClickTag("comma")}
-          >
-            COMMA
-          </button>
+      <div className="w-full flex flex-col md:flex-row gap-4 justify-between items-center">
+        <UserPostsTags tag={tag} onClick={handleClickTag} />
+        <div className="w-full md:w-auto flex-1 flex justify-end">
+          <Filter sort={sort} sortOption={SORT_OPTIONS} onChange={changeSort} />
         </div>
-        <Filter sort={sort} sortOption={SORT_OPTIONS} onChange={changeSort} />
       </div>
       {isLoading ? (
         <div className="grid grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-[30px]">
@@ -65,7 +44,7 @@ export default function UserPostContaienr({ userId }: Props) {
           포스트가 존재하지 않습니다.
         </div>
       ) : (
-        <div className="grid grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-[30px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-[30px]">
           {posts?.data.map((item) => (
             <PostItem key={item.id} item={item} />
           ))}

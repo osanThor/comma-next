@@ -69,8 +69,8 @@ export default function UserProfileContainer({ user, userId }: Props) {
   }, [userGames, fetchRankings]);
 
   return (
-    <div className="flex items-center mb-16">
-      <div className="relative mr-[78px]">
+    <div className="flex flex-col sm:flex-row items-center mb-16">
+      <div className="relative mr-5 md:mr-[78px]">
         {user ? (
           <Avatar src={user.profile_image} size="xl" />
         ) : (
@@ -91,9 +91,9 @@ export default function UserProfileContainer({ user, userId }: Props) {
           </Link>
         )}
       </div>
-      <div className="flex flex-col items-start">
-        <div className="flex flex-wrap">
-          <h2 className="text-white font-bold font-dnf text-[30px] mr-[8px]">
+      <div className="flex flex-col items-center sm:items-start">
+        <div className="flex flex-col sm:flex-row flex-wrap">
+          <h2 className="text-white font-bold font-dnf text-[30px] text-center sm:text-left mt-4 sm:mt-0 sm:mr-[8px]">
             {user ? user.name : <div className="w-[90px] h-10 skeleton" />}
           </h2>
           <span className="text-gray-400 self-end mb-1 text-sm">
