@@ -1,3 +1,4 @@
+import Footer from "@/components/common/Footer";
 import MainCardContainer from "@/containers/main/MainCardContainer";
 import MainCommunityContainer from "@/containers/main/MainCommunityContainer";
 import MainGameCommunityContainer from "@/containers/main/MainGameCommunityContainer";
@@ -38,6 +39,7 @@ export default function Home() {
       </section>
       <MainGameCommunityContainer />
       <MainCommunityContainer />
+      <Footer />
     </>
   );
 }
