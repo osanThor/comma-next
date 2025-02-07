@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import NotificationContainer from "./NotificationContainer";
 
 export default function HeaderContainer() {
   const user = useAuthStore((state) => state.user);
@@ -59,6 +60,7 @@ export default function HeaderContainer() {
                 <Avatar src={user.profile_image} size="sm" />
               </Link>
             )}
+            <NotificationContainer />
             {/* <router-link :to="`/user/${user?.id}`">
           <avatar v-show="user" :src="user?.profile_image" size="sm"></avatar>
         </router-link>

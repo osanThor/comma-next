@@ -1,4 +1,5 @@
 import supabase from "@/lib/supabase/client";
+import { NotificationType } from "@/types/notification";
 
 interface InNotificationBody {
   userId: string; // 받는 사람
@@ -52,7 +53,9 @@ export const realtimeNewNotifications = (
     .subscribe();
 };
 
-export const getNotifications = async (userId: string) => {
+export const getNotifications = async (
+  userId: string
+): Promise<NotificationType[]> => {
   const { data, error } = await supabase
     .from("notifications")
     .select("*,sender:sender_id(id,name,profile_image)")
@@ -63,7 +66,7 @@ export const getNotifications = async (userId: string) => {
   return data;
 };
 
-export const readNotification = async (notificationId: string) => {
+export const readNotification = async (notificationId: number) => {
   const { error } = await supabase
     .from("notifications")
     .update({ is_read: true })

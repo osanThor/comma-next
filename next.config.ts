@@ -11,7 +11,22 @@ const nextConfig: NextConfig = {
         pathname: "/storage/**",
         search: "",
       },
+      {
+        protocol: "https",
+        hostname: "img1.kakaocdn.net",
+        pathname: "/thumb/**",
+      },
+      {
+        protocol: "http",
+        hostname: "img1.kakaocdn.net",
+        pathname: "/thumb/**",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
+    domains: [],
   },
 };
 

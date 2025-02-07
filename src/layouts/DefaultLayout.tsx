@@ -1,6 +1,6 @@
 "use client";
 
-import HeaderContainer from "@/containers/common/HeaderContainer";
+import HeaderContainer from "@/containers/common/header/HeaderContainer";
 import { useAuthStore } from "@/stores/authStore";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
