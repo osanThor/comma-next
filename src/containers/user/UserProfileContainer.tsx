@@ -9,9 +9,9 @@ import {
 import { useAuthStore } from "@/stores/authStore";
 import { UserType } from "@/types/auth";
 import formatedTime from "@/utils/formatedTime";
+import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type Props = {
   user: UserType;
@@ -69,7 +69,7 @@ export default function UserProfileContainer({ user, userId }: Props) {
   }, [userGames, fetchRankings]);
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center mb-16">
       <div className="relative mr-[78px]">
         {user ? (
           <Avatar src={user.profile_image} size="xl" />
@@ -81,10 +81,12 @@ export default function UserProfileContainer({ user, userId }: Props) {
             href={"/user/edit"}
             className="absolute bottom-[4px] right-[5px] bg-point-500 rounded-full w-[39px] h-[39px] flex items-center justify-center overflow-hidden cursor-pointer transform transition-transform duration-100 ease-in-out hover:scale-125"
           >
-            <img
+            <Image
               className="w-[16px] hover:color-main-500"
               src="/assets/images/icons/editProfile-icon.svg"
               alt="수정"
+              width={16}
+              height={16}
             />
           </Link>
         )}

@@ -7,6 +7,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import UserProfileContainer from "./UserProfileContainer";
+import UserPostContaienr from "./UserPostContaienr";
+import UserLikeContainer from "./UserLikeContainer";
+import UserRankContainer from "./UserRankContainer";
+import UserCommentContainer from "./UserCommentContainer";
 
 type Props = {
   userId: string;
@@ -39,6 +43,10 @@ export default function UserRootContainer({ userId, path }: Props) {
   return (
     <>
       <UserProfileContainer user={user} userId={userId} />
+      {path === "post" && <UserPostContaienr userId={userId} />}
+      {path === "like" && <UserLikeContainer />}
+      {path === "rank" && <UserRankContainer />}
+      {path === "comment" && <UserCommentContainer />}
     </>
   );
 }
