@@ -11,6 +11,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.48.1",
     "dayjs": "^1.11.13",
+    "framer-motion": "^12.4.0",
     "html2canvas": "^1.4.1",
     "install": "^0.13.0",
     "kaplay": "^3001.0.9",

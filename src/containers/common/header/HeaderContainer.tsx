@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import NotificationContainer from "./NotificationContainer";
+import SideMenuContainer from "./SideMenuContainer";
 
 export default function HeaderContainer() {
   const user = useAuthStore((state) => state.user);
@@ -31,9 +32,6 @@ export default function HeaderContainer() {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
   return (
     <>
       <div ref={observerTargetRef} className="h-0 w-full" />
@@ -61,11 +59,7 @@ export default function HeaderContainer() {
               </Link>
             )}
             <NotificationContainer />
-            {/* <router-link :to="`/user/${user?.id}`">
-          <avatar v-show="user" :src="user?.profile_image" size="sm"></avatar>
-        </router-link>
-        <notification></notification>
-        <side-menu></side-menu> */}
+            <SideMenuContainer />
           </div>
         </div>
       </header>

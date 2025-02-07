@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import ToastContainer from "@/containers/common/ToastContainer";
+import ModalContainer from "@/containers/common/ModalContainer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +15,11 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="kr">
-      <body className="font-pretendard">{children}</body>
+      <body className="font-pretendard">
+        {children}
+        <ToastContainer />
+        <ModalContainer />
+      </body>
     </html>
   );
 }
