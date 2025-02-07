@@ -18,11 +18,13 @@ export default function UserRankingItem({ item }: Props) {
         <div className="flex-1 flex justify-center text-white text-lg font-semibold">
           {item.game.display_name}
         </div>
-        <div className="flex-1 flex justify-center text-white text-base font-semibold opacity-70">
-          {formatedCount(item.score)}점
-        </div>
-        <div className="flex-1 flex justify-center text-white text-base font-semibold opacity-70">
-          {formatedTime(item.play_time)}
+        <div className="flex flex-col md:flex-row gap-1">
+          <div className="flex-1 flex justify-center text-white text-base font-semibold opacity-70">
+            {formatedCount(item.score)}점
+          </div>
+          <div className="flex-1 flex justify-center text-white text-base font-semibold opacity-70">
+            {formatedTime(item.play_time)}
+          </div>
         </div>
         <div className="flex-1 flex justify-center text-white text-base font-semibold">
           {item.rank}등

@@ -42,7 +42,7 @@ export default async function UserPage({ params }: Props) {
       <Image
         src="/assets/images/singleGhost.png"
         alt="ghost"
-        className="absolute bottom-[-27px] -left-8 w-[129px] h-[118px] z-10 overflow-visible"
+        className="absolute scale-50 md:scale-100 -bottom-10 -left-16 md:bottom-[-27px] md:-left-8 w-[129px] h-[118px] z-10 overflow-visible"
         width={130}
         height={120}
       />

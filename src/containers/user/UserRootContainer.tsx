@@ -46,7 +46,7 @@ export default function UserRootContainer({ userId, path }: Props) {
       {path === "post" && <UserPostContaienr userId={userId} />}
       {path === "like" && <UserLikeContainer userId={userId} />}
       {path === "rank" && <UserRankContainer />}
-      {path === "comment" && <UserCommentContainer />}
+      {path === "comment" && <UserCommentContainer userId={userId} />}
     </>
   );
 }
