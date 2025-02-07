@@ -42,7 +42,7 @@ export const upsertUser = async (user: User) => {
     .single();
 
   if (error && error.code === "PGRST116") {
-    const addToast = useToastStore((state) => state.addToast);
+    const { addToast } = useToastStore.getState();
     const { data: newUser, error: insertError } = await supabase
       .from("users")
       .insert([

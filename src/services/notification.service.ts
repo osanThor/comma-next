@@ -33,13 +33,7 @@ export const createNotification = async ({
 
 export const realtimeNewNotifications = (
   userId: string,
-  callback: (
-    payload:
-      | {}
-      | {
-          [key: string]: any;
-        }
-  ) => void
+  callback: (payload: Record<string, string>) => void
 ) => {
   return supabase
     .channel("notifications")
