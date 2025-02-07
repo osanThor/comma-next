@@ -45,6 +45,7 @@ export default function Avatar({
         src={src}
         alt="avatar"
         onLoad={handleImgLoad}
+        fill
       />
     </div>
   );

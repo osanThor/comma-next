@@ -1,4 +1,5 @@
 "use client";
+import Avatar from "@/components/common/Avatar";
 import { useAuthStore } from "@/stores/authStore";
 import Image from "next/image";
 import Link from "next/link";
@@ -53,6 +54,11 @@ export default function HeaderContainer() {
             </Link>
           </h1>
           <div className="flex items-center gap-4">
+            {user && (
+              <Link href={`/user/${user.id}`}>
+                <Avatar src={user.profile_image} size="sm" />
+              </Link>
+            )}
             {/* <router-link :to="`/user/${user?.id}`">
           <avatar v-show="user" :src="user?.profile_image" size="sm"></avatar>
         </router-link>

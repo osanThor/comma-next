@@ -3,5 +3,5 @@ export type UserType = {
   email: string;
   name: string;
   bio: string | null;
-  profile_image: string | null;
+  profile_image?: string;
 };
