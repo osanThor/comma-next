@@ -90,7 +90,7 @@ export const updateUserProfile = async (
 };
 
 supabase.auth.onAuthStateChange((event, session) => {
-  const updateUser = useAuthStore((state) => state.updateUser);
+  const { updateUser } = useAuthStore.getState();
   console.log("Auth event:", event);
 
   if (!session?.user) {
