@@ -21,12 +21,12 @@ export default function MainCommunityContainer() {
   );
 
   return (
-    <section className="w-[calc(100%-40px)] max-w-[1440px] flex flex-col items-center contents-box py-[83px] mb-10">
+    <section className="w-[calc(100%-40px)] max-w-[1440px] flex flex-col items-center contents-box py-10 md:py-[83px] mb-10">
       <h2 className="flex flex-col items-center text-2xl md:text-4xl font-dnf text-white relative mb-[30px]">
-        <TitleLeft className="scale-50 md:scale-100 h-10 absolute right-[calc(100%-30px)] md:right-[calc(100%+28px)] bottom-0" />
+        <TitleLeft className="hidden sm:block scale-50 md:scale-100 h-10 absolute right-[calc(100%-30px)] md:right-[calc(100%+28px)] bottom-0" />
         <span className="text-xl md:text-3xl">COMMA</span>
         COMMUNITY
-        <TitleRight className="scale-50 md:scale-100 h-10 absolute left-[calc(100%-30px)] md:left-[calc(100%+28px)] bottom-0" />
+        <TitleRight className="hidden sm:block scale-50 md:scale-100 h-10 absolute left-[calc(100%-30px)] md:left-[calc(100%+28px)] bottom-0" />
       </h2>
       <Link
         href="/post/write?category=free"
@@ -39,7 +39,7 @@ export default function MainCommunityContainer() {
           <Filter sort={sort} sortOption={SORT_OPTIONS} onChange={changeSort} />
         </div>
         {isLoading ? (
-          <div className="grid grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-5">
             <PostSkeleton length={12} />
           </div>
         ) : posts?.data.length === 0 ? (
@@ -58,6 +58,7 @@ export default function MainCommunityContainer() {
             page={page}
             total={posts?.totalCount || 0}
             onChnage={chanagePage}
+            limit={5}
           />
         </div>
       </div>

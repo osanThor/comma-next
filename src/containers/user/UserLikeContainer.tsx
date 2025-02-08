@@ -35,7 +35,7 @@ export default function UserLikeContainer({ userId }: Props) {
         </div>
       </div>
       {isLoading ? (
-        <div className="grid grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-[30px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-[30px]">
           <PostSkeleton length={12} />
         </div>
       ) : posts?.data.length === 0 ? (

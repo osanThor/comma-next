@@ -15,7 +15,7 @@ export default function Pagination({
   page = 1,
   total,
   pageSize = 12,
-  limit = 10,
+  limit = 5,
   onChnage,
 }: Props) {
   const totalPages = Math.ceil(total / pageSize);

@@ -214,7 +214,7 @@ export const deletePost = async (postId: string) => {
   return "success";
 };
 
-export const getPost = async (postId: string) => {
+export const getPost = async (postId: string): Promise<PostSchema> => {
   const { data, error } = await supabase
     .from("posts_with_counts")
     .select("*,user:user_id(id, name, email, profile_image)")

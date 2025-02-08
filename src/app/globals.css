@@ -65,3 +65,20 @@ body {
     font-style: normal;
   }
 }
+.swiper-button-prev,
+.swiper-button-next {
+  color: #ce0a9c !important;
+  opacity: 0.5;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active,
+.swiper-pagination-bullet {
+  background: #ce0a9c !important;
+}
+.swiper-pagination {
+  bottom: 20px !important;
+}

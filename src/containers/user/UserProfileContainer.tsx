@@ -37,7 +37,7 @@ export default function UserProfileContainer({ user, userId }: Props) {
 
   return (
     <div className="flex flex-col sm:flex-row justify-center md:justify-start items-center mb-16">
-      <div className="relative mr-5 md:mr-[78px]">
+      <div className="relative sm:mr-5 md:mr-[78px]">
         {user ? (
           <Avatar src={user.profile_image} size="xl" />
         ) : (
