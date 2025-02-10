@@ -29,7 +29,7 @@ export default function UserEditContainer() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleCancel = () => {
-    if (user) router.push(`/user/${user.id}`);
+    if (user) router.push(`/user/${user.id}/post`);
   };
   const updateCharCount = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCharCount(e.target.value.length);
@@ -77,7 +77,7 @@ export default function UserEditContainer() {
       if (data) {
         addToast("성공적으로 저장 됐어요.");
         updateUser({ ...user, ...body });
-        router.push(`/user/${user.id}`);
+        router.push(`/user/${user.id}/post`);
       }
     } catch (err) {
       console.error(err);

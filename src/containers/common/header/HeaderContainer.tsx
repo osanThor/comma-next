@@ -54,7 +54,7 @@ export default function HeaderContainer() {
           </h1>
           <div className="flex items-center gap-4">
             {user && (
-              <Link href={`/user/${user.id}`}>
+              <Link href={`/user/${user.id}/post`}>
                 <Avatar src={user.profile_image} size="sm" />
               </Link>
             )}

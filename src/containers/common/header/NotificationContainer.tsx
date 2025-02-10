@@ -160,7 +160,7 @@ export default function NotificationContainer() {
                       )}
                       key={item.id}
                       onClick={() =>
-                        handleClickItem(`/user/${item.sender.id}`, item.id)
+                        handleClickItem(`/user/${item.sender.id}/post`, item.id)
                       }
                     >
                       <Avatar src={item.sender.profile_image} />

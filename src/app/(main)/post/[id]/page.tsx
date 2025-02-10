@@ -23,7 +23,7 @@ export default async function PostDetailPage({ params }: Props) {
               <PostContentContainer post={data} />
               <div className="w-full flex flex-row items-center justify-between">
                 <Link
-                  href={`/user/${data?.user?.id}`}
+                  href={`/user/${data?.user?.id}/post`}
                   className="flex flex-row items-center gap-2 cursor-pointer bg-main-500/30 transition-all hover:bg-main-500/50 pl-4 pr-5 py-2 rounded-full"
                 >
                   <div className="w-6 h-6 rounded-full">
