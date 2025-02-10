@@ -12,7 +12,7 @@ const SORT_OPTIONS = [
 ] as SortOptionsType[];
 
 export default function UserCommentContainer({ userId }: Props) {
-  const { comments, isLoading, page, chanagePage, sort, changeSort, mutate } =
+  const { comments, isLoading, page, changePage, sort, changeSort, mutate } =
     useUserComments(userId);
 
   return (
@@ -50,7 +50,7 @@ export default function UserCommentContainer({ userId }: Props) {
         <Pagination
           page={page}
           total={comments?.totalCount || 0}
-          onChnage={chanagePage}
+          onChnage={changePage}
           pageSize={10}
         />
       </div>

@@ -17,13 +17,16 @@ const SORT_OPTIONS = [
 
 export default function UserLikeContainer({ userId }: Props) {
   const [tag, setTag] = useState<"game" | "comma">("game");
-  const { posts, isLoading, page, chanagePage, sort, changeSort } =
-    useUserPosts(userId, tag === "comma", false);
+  const { posts, isLoading, page, changePage, sort, changeSort } = useUserPosts(
+    userId,
+    tag === "comma",
+    false
+  );
 
   const handleClickTag = (tagName: "game" | "comma") => {
     if (tag === tagName) return;
     setTag(tagName);
-    chanagePage(1);
+    changePage(1);
   };
 
   return (
@@ -35,7 +38,7 @@ export default function UserLikeContainer({ userId }: Props) {
         </div>
       </div>
       {isLoading ? (
-        <div className="grid grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-[30px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-[30px]">
           <PostSkeleton length={12} />
         </div>
       ) : posts?.data.length === 0 ? (
@@ -53,7 +56,7 @@ export default function UserLikeContainer({ userId }: Props) {
         <Pagination
           page={page}
           total={posts?.totalCount || 0}
-          onChnage={chanagePage}
+          onChnage={changePage}
         />
       </div>
     </div>

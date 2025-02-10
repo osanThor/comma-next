@@ -14,6 +14,12 @@ export type CommentSchema = {
   post: PostSchema;
 };
 
+export type CreateCommentType = {
+  postId: string;
+  content: string;
+  userId: string;
+};
+
 const formetSort = (value: "desc" | "likes") => {
   switch (value) {
     case "desc":
@@ -30,7 +36,7 @@ export const getComments = async (
   sort: "desc" | "likes" = "desc",
   page = 1,
   limit = 10
-) => {
+): Promise<{ data: CommentSchema[]; totalCount: number }> => {
   const { count, error: countError } = await supabase
     .from("comments_with_counts")
     .select("id", { count: "exact" })
@@ -59,7 +65,7 @@ export const getComments = async (
 
   return {
     data,
-    totalCount: count,
+    totalCount: count || 0,
   };
 };
 
@@ -106,16 +112,14 @@ export const createComment = async ({
   postId,
   content,
   userId,
-}: {
-  postId: string;
-  content: string;
-  userId: string;
-}) => {
-  const { error } = await supabase
+}: CreateCommentType): Promise<{ data: CommentSchema; message: string }> => {
+  const { data, error } = await supabase
     .from("comments")
-    .insert([{ post_id: postId, content, user_id: userId }]);
+    .insert([{ post_id: postId, content, user_id: userId }])
+    .select("*,user:user_id(id, name, email, profile_image)");
   if (error) throw error;
-  return "success";
+  if (data && data.length > 0) return { data: data[0], message: "success" };
+  throw new Error("Create Post Fail");
 };
 
 export const deleteComment = async (commentId: string) => {

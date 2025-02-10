@@ -190,7 +190,7 @@ export const createPost = async ({
   if (error) throw error;
   if (data && data.length > 0)
     return { postId: data[0].id, message: "success" };
-  return new Error("Create Post Fail");
+  throw new Error("Create Post Fail");
 };
 
 export const updatePost = async ({
@@ -214,7 +214,7 @@ export const deletePost = async (postId: string) => {
   return "success";
 };
 
-export const getPost = async (postId: string) => {
+export const getPost = async (postId: string): Promise<PostSchema> => {
   const { data, error } = await supabase
     .from("posts_with_counts")
     .select("*,user:user_id(id, name, email, profile_image)")

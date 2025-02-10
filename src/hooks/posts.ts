@@ -18,7 +18,7 @@ export default function usePosts(category: string, limit: number, query = "") {
   const [page, setPage] = useState<number>(1);
   const [sort, setSort] = useState<SortType>("desc");
 
-  const chanagePage = (currentPage: number) => {
+  const changePage = (currentPage: number) => {
     setPage(currentPage);
   };
   const changeSort = (currentSort: SortType) => {
@@ -40,7 +40,7 @@ export default function usePosts(category: string, limit: number, query = "") {
     isLoading,
     error,
     page,
-    chanagePage,
+    changePage,
     sort,
     changeSort,
   };
