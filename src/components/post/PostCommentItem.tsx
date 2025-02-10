@@ -3,18 +3,98 @@ import Link from "next/link";
 import Avatar from "../common/Avatar";
 import formatedDate from "@/utils/formatedDate";
 import { twMerge } from "tailwind-merge";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import { useAuthStore } from "@/stores/authStore";
+import { useToastStore } from "@/stores/toastStore";
+import {
+  InLikeBody,
+  removeLike,
+  addLike,
+  checkLike,
+} from "@/services/like.service";
+import { createNotification } from "@/services/notification.service";
 
 type Props = {
   item: CommentSchema;
+  postId: string;
 };
-export default function PostCommentItem({ item }: Props) {
+export default function PostCommentItem({ item, postId }: Props) {
+  const user = useAuthStore((state) => state.user);
+  const addToast = useToastStore((state) => state.addToast);
+
+  const [disabled, setDisabled] = useState<boolean>(true);
+  const [likeCount, setLikeCount] = useState<number>(item.like_count || 0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const handleUnlike = async (body: InLikeBody) => {
+    const result = await removeLike(body);
+    if (result) {
+      setLikeCount((prev) => prev - 1);
+      setIsLiked(false);
+    }
+  };
+  const handlelike = async (body: InLikeBody) => {
+    const result = await addLike(body);
+    if (result) {
+      setLikeCount((prev) => prev + 1);
+      setIsLiked(true);
+      if (item.user.id !== body.userId)
+        await createNotification({
+          userId: item.user.id,
+          senderId: body.userId,
+          targetId: postId,
+          targetType: "comment",
+          type: "like",
+          message: ` 회원님의 댓글을 좋아합니다.`,
+        });
+    }
+  };
 
+  const handleClickLike = useCallback(async () => {
+    try {
+      if (!user) return addToast("다시 로그인해주세요.", "error");
+      setDisabled(true);
+      const body = {
+        userId: user.id,
+        targetId: item.id,
+        targetType: "comment",
+      } as InLikeBody;
+      if (isLiked) {
+        await handleUnlike(body);
+      } else {
+        await handlelike(body);
+      }
+      setIsAnimating(true);
+    } catch (err) {
+      console.error("댓글 좋아요 처리 실패:", err);
+      addToast("좋아요 처리를 실패했어요.", "error");
+    } finally {
+      setDisabled(false);
+      setTimeout(() => setIsAnimating(false), 300);
+    }
+  }, [likeCount, isLiked, user]);
+
+  useEffect(() => {
+    const handleCheckLike = async (userId: string) => {
+      try {
+        setDisabled(true);
+        const result = await checkLike({
+          userId,
+          targetId: item.id,
+          targetType: "comment",
+        });
+        setIsLiked(result);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setDisabled(false);
+      }
+    };
+    if (user) handleCheckLike(user.id);
+  }, [user]);
   return (
-    <div className="flex flex-row items-center justify-between w-full">
+    <li className="flex flex-row items-center justify-between w-full">
       <div className="flex flex-row items-start gap-4">
         <div className="pt-2">
           <Link href={"/"}>
@@ -35,7 +115,12 @@ export default function PostCommentItem({ item }: Props) {
           </p>
         </div>
       </div>
-      <div className="w-6 flex flex-col items-center justify-center font-medium text-white object-contain cursor-pointer">
+      <button
+        onClick={handleClickLike}
+        className="w-6 flex flex-col items-center justify-center font-medium text-white object-contain cursor-pointer"
+        type="button"
+        disabled={disabled}
+      >
         <Image
           className={twMerge(
             " object-contain transition-all ease-in-out",
@@ -50,12 +135,12 @@ export default function PostCommentItem({ item }: Props) {
           width={24}
           height={26}
         />
-        {item.like_count > 0 && (
+        {likeCount > 0 && (
           <p className={twMerge("text-sm", isLiked && "text-point-500")}>
-            {item.like_count.toString().padStart(2, "0")}
+            {likeCount.toString().padStart(2, "0")}
           </p>
         )}
-      </div>
-    </div>
+      </button>
+    </li>
   );
 }

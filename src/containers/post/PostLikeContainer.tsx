@@ -53,7 +53,6 @@ export default function PostLikeContainer({ post }: Props) {
     try {
       if (!user) return addToast("다시 로그인해주세요.", "error");
       setDisabled(true);
-      console.log(isLiked);
       const body = {
         userId: user.id,
         targetId: post.id,

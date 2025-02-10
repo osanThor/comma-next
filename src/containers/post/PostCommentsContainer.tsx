@@ -51,6 +51,7 @@ export default function PostCommentsContainer({ postId }: Props) {
         <PostCommentsListContainer
           comments={comments ? comments.data : []}
           isLoading={isLoading}
+          postId={postId}
         />
         <Pagination
           page={page}
