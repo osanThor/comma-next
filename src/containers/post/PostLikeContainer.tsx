@@ -1,6 +1,11 @@
 "use client";
 
-import { addLike, checkLike, removeLike } from "@/services/like.service";
+import {
+  InLikeBody,
+  addLike,
+  checkLike,
+  removeLike,
+} from "@/services/like.service";
 import { createNotification } from "@/services/notification.service";
 import { PostSchema } from "@/services/post.service";
 import { useAuthStore } from "@/stores/authStore";
@@ -16,45 +21,48 @@ export default function PostLikeContainer({ post }: Props) {
 
   const addToast = useToastStore((state) => state.addToast);
 
-  const [disabled, setDisabled] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(true);
   const [likeCount, setLikeCount] = useState<number>(post.like_count || 0);
   const [isLiked, setIsLiked] = useState<boolean>(false);
+
+  const handleUnlike = async (body: InLikeBody) => {
+    const result = await removeLike(body);
+    if (result) {
+      setLikeCount((prev) => prev - 1);
+      setIsLiked(false);
+    }
+  };
+  const handlelike = async (body: InLikeBody) => {
+    const result = await addLike(body);
+    if (result) {
+      setLikeCount((prev) => prev + 1);
+      setIsLiked(true);
+      if (post.user.id !== body.userId)
+        await createNotification({
+          userId: post.user.id,
+          senderId: body.userId,
+          targetId: post.id,
+          targetType: "post",
+          type: "like",
+          message: ` 회원님의 게시글을 좋아합니다.`,
+        });
+    }
+  };
 
   const handleClickLike = useCallback(async () => {
     try {
       if (!user) return addToast("다시 로그인해주세요.", "error");
       setDisabled(true);
       console.log(isLiked);
+      const body = {
+        userId: user.id,
+        targetId: post.id,
+        targetType: "post",
+      } as InLikeBody;
       if (isLiked) {
-        // unlike
-        const result = await removeLike({
-          userId: user.id,
-          targetId: post.id,
-          targetType: "post",
-        });
-        if (result) {
-          setLikeCount((prev) => prev - 1);
-          setIsLiked(false);
-        }
+        await handleUnlike(body);
       } else {
-        //like
-        const result = await addLike({
-          userId: user.id,
-          targetId: post.id,
-          targetType: "post",
-        });
-        if (result) {
-          setLikeCount((prev) => prev + 1);
-          setIsLiked(true);
-          await createNotification({
-            userId: post.user.id,
-            senderId: user.id,
-            targetId: post.id,
-            targetType: "post",
-            type: "like",
-            message: ` 회원님의 게시글을 좋아합니다.`,
-          });
-        }
+        await handlelike(body);
       }
     } catch (err) {
       console.error("게시글 좋아요 처리 실패:", err);
@@ -67,6 +75,7 @@ export default function PostLikeContainer({ post }: Props) {
   useEffect(() => {
     const handleCheckLike = async (userId: string) => {
       try {
+        setDisabled(true);
         const result = await checkLike({
           userId,
           targetId: post.id,
@@ -75,6 +84,8 @@ export default function PostLikeContainer({ post }: Props) {
         setIsLiked(result);
       } catch (err) {
         console.error(err);
+      } finally {
+        setDisabled(false);
       }
     };
     if (user) handleCheckLike(user.id);

@@ -43,7 +43,7 @@ export default async function PostDetailPage({ params }: Props) {
               </div>
             </article>
           </div>
-          <PostCommentsContainer />
+          <PostCommentsContainer postId={id} />
         </section>
       </div>
       <Footer />

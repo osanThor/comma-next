@@ -29,7 +29,7 @@ export default function useUserPosts(
   const [page, setPage] = useState<number>(1);
   const [sort, setSort] = useState<SortType>("desc");
 
-  const chanagePage = (currentPage: number) => {
+  const changePage = (currentPage: number) => {
     setPage(currentPage);
   };
   const changeSort = (currentSort: SortType) => {
@@ -54,7 +54,7 @@ export default function useUserPosts(
     isLoading,
     error,
     page,
-    chanagePage,
+    changePage,
     sort,
     changeSort,
   };

@@ -1,6 +1,6 @@
 import supabase from "@/lib/supabase/client";
 
-interface InLikeBody {
+export interface InLikeBody {
   userId: string;
   targetId: string;
   targetType: "post" | "comment";

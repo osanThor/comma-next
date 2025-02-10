@@ -15,7 +15,7 @@ const SORT_OPTIONS = [
 ] as SortOptionsType[];
 
 export default function MainCommunityContainer() {
-  const { posts, isLoading, page, chanagePage, sort, changeSort } = usePosts(
+  const { posts, isLoading, page, changePage, sort, changeSort } = usePosts(
     "free",
     12
   );
@@ -57,7 +57,7 @@ export default function MainCommunityContainer() {
           <Pagination
             page={page}
             total={posts?.totalCount || 0}
-            onChnage={chanagePage}
+            onChnage={changePage}
             limit={5}
           />
         </div>
