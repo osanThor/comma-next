@@ -48,6 +48,9 @@ export default {
         dnf: ["DNFBitBitv2", "san-serif"],
         pixelNes: ["Pixel_NES", "san-serif"],
       },
+      gridTemplateColumns: {
+        16: "repeat(16, minmax(0, 1fr))",
+      },
     },
   },
   variants: {

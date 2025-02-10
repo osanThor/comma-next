@@ -58,6 +58,6 @@ const GAME_DETAILS = {
       "외계인이 지상에 닿으면 게임이 종료됩니다.",
     ],
   },
-};
+} as { [key: string]: { intro: string; description: string[] } };
 
 export { GAME_NAME_MAP, GAME_BANNERS, GAME_DETAILS };

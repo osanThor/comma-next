@@ -33,12 +33,12 @@ export default function Footer() {
               <Image
                 src="/assets/images/logo.png"
                 alt="Project Logo"
-                className="h-4 w-auto"
+                className="h-4 w-auto min-w-[66px]"
                 width={66}
                 height={16}
               />
             </div>
-            <div className="flex items-center pl-8">
+            <div className="flex flex-wrap items-center pl-8">
               {MEMBERS.map((member) => (
                 <Link
                   href={member.github}
