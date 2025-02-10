@@ -10,6 +10,7 @@ import { createNotification } from "@/services/notification.service";
 import { PostSchema } from "@/services/post.service";
 import { useAuthStore } from "@/stores/authStore";
 import { useToastStore } from "@/stores/toastStore";
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 
 type Props = {
@@ -96,13 +97,16 @@ export default function PostLikeContainer({ post }: Props) {
       type="button"
       disabled={disabled}
     >
-      <img
+      <Image
         className="w-5 h-5 object-contain"
         src={
           isLiked
             ? "/assets/images/icons/post-like-icon.png"
             : "/assets/images/icons/post-nolike-icon.png"
         }
+        alt="postLike"
+        width={20}
+        height={20}
       />
       {likeCount > 0 && <p className="text-sm">{likeCount}</p>}
     </button>

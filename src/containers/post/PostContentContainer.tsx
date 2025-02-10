@@ -4,7 +4,6 @@ import { PostSchema, deletePost } from "@/services/post.service";
 import { useAuthStore } from "@/stores/authStore";
 import { useModalStore } from "@/stores/modalStore";
 import { useToastStore } from "@/stores/toastStore";
-import formatedCount from "@/utils/formatedCount";
 import formatedDate from "@/utils/formatedDate";
 import { useRouter } from "next/navigation";
 

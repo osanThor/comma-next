@@ -23,7 +23,11 @@ export default function PostCommentFormContainer({
 
   const handleAddComment = async () => {
     if (!user) return;
-    const result = await addComment({ userId: user.id, postId, content });
+    const result = await addComment({
+      userId: user.id,
+      postId,
+      content: content.trim(),
+    });
     if (result) {
       setContetn("");
       addToast("댓글을 등록했어요.");

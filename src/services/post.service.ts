@@ -190,7 +190,7 @@ export const createPost = async ({
   if (error) throw error;
   if (data && data.length > 0)
     return { postId: data[0].id, message: "success" };
-  return new Error("Create Post Fail");
+  throw new Error("Create Post Fail");
 };
 
 export const updatePost = async ({

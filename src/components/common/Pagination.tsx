@@ -18,7 +18,6 @@ export default function Pagination({
   limit = 5,
   onChnage,
 }: Props) {
-  console.log(total, pageSize);
   const totalPages = Math.ceil(total / pageSize);
   const [currentPageArray, setCurrentPageArray] = useState<number[]>([]);
 

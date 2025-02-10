@@ -46,7 +46,6 @@ export default function useComments(postId: string) {
     async (body: CreateCommentType) => {
       try {
         if (!comments) return;
-        console.log(body);
         if (!body.content.trim())
           return addToast("댓글을 입력해주세요.", "error");
 
