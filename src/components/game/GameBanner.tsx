@@ -9,7 +9,7 @@ type Props = {
 export default function GameBanner({ gameName }: Props) {
   return (
     <div
-      className="col-span-8 lg:col-span-12 w-full h-[404px] rounded-2xl bg-main-500 flex flex-col relative"
+      className="col-span-8 lg:col-span-12 h-[404px] rounded-2xl bg-main-500 flex flex-col relative"
       style={{
         backgroundImage: `url(${GAME_BANNERS[gameName]})`,
         backgroundSize: "cover",

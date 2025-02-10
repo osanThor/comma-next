@@ -76,7 +76,7 @@ export default function GameListContainer({ gameName }: Props) {
           <div className="flex items-end justify-between">
             <div className="text-[10.8px] flex items-center gap-1">
               <CommentIcon />
-              {postCounts[gameName]}
+              {postCounts[game.name]}
             </div>
             <PlayIcon />
           </div>
