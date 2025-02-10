@@ -32,21 +32,31 @@ export default function GameCommunityContainer({ gameName }: Props) {
     setQuery(e.target.value);
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    changePage(1);
+  };
+
   useEffect(() => {
     changePage(1);
-  }, [debouncedSearch, changePage]);
+  }, [debouncedSearch]);
 
   return (
-    <div className="col-span-8 lg:col-span-12 pb-20 border-[3px] px-[60px] pt-[60px] border-white bg-[rgba(23,18,50,0.2)] backdrop-blur-[10px] rounded-[30px]">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-[26px]">
-          <h2 className="font-dnf text-white text-[42px]">게시글</h2>
+    <div className="col-span-8 lg:col-span-12 order-2 lg:order-1 pb-20 border-[3px] px-5 md:px-[60px] pt-[60px] border-white bg-[rgba(23,18,50,0.2)] backdrop-blur-[10px] rounded-2xl ">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-5">
+        <div className="flex w-full justify-between md:justify-normal md:w-auto items-center gap-2 md:gap-[26px]">
+          <h2 className="font-dnf text-white text-2xl md:text-[42px]">
+            게시글
+          </h2>
           <Filter sort={sort} sortOption={SORT_OPTIONS} onChange={changeSort} />
         </div>
-        <form className="w-[295px] h-[40px] bg-main-500 rounded-3xl opacity-50 relative hover:opacity-100 focus-within:opacity-100">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full md:max-w-[295px] h-[40px] bg-main-500 rounded-3xl opacity-50 relative hover:opacity-100 focus-within:opacity-100"
+        >
           <input
             type="text"
-            className="w-full h-full bg-transparent outline-none text-white pl-5 pr-[50px]"
+            className="w-full max-w-[295px] h-full bg-transparent outline-none text-white pl-5 pr-[50px]"
             onChange={handleChangeFields}
             value={query || ""}
           />
@@ -65,7 +75,7 @@ export default function GameCommunityContainer({ gameName }: Props) {
         </form>
       </div>
       {isLoading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-5">
           <PostSkeleton length={12} />
         </div>
       ) : posts?.data.length === 0 ? (
@@ -73,7 +83,7 @@ export default function GameCommunityContainer({ gameName }: Props) {
           포스트가 존재하지 않습니다.
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-[30px] mb-[70px] mt-5">
           {posts?.data.map((item) => (
             <PostItem key={item.id} item={item} />
           ))}
