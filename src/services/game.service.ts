@@ -1,4 +1,6 @@
 import supabase from "@/lib/supabase/client";
+import { InGame } from "@/stores/gameStore";
+import { UserType } from "@/types/auth";
 
 export type GameScoreSchema = {
   id: string;
@@ -9,6 +11,12 @@ export type GameScoreSchema = {
   total_play_time: number;
   create_at: string;
   updated_at: string | null;
+};
+
+export type GameRankingType = GameScoreSchema & {
+  rank: number;
+  user: UserType;
+  game: InGame;
 };
 
 export const getGames = async () => {
@@ -80,7 +88,10 @@ export const updateGameScore = async (
   return renewal ? "new success" : "success";
 };
 
-export const getGameRanking = async (gameId: string, sortType = "desc") => {
+export const getGameRanking = async (
+  gameId: string,
+  sortType = "desc"
+): Promise<GameRankingType[]> => {
   const { data, error } = await supabase
     .from("game_scores")
     .select(

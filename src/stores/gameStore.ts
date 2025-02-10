@@ -1,4 +1,5 @@
 import {
+  GameRankingType,
   GameScoreSchema,
   getGameRanking,
   getGameScoreByUser,
@@ -8,7 +9,7 @@ import { UserType } from "@/types/auth";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface InGame {
+export interface InGame {
   id: string;
   name: string;
   display_name: string;
@@ -20,16 +21,11 @@ interface InRanker {
   score: number;
 }
 
-export interface InUserRank extends GameScoreSchema {
-  rank: number;
-  game: InGame;
-}
-
 interface InGameStore {
   games: InGame[];
   userGames: GameScoreSchema[];
   playTime: number;
-  rankings: InUserRank[];
+  rankings: GameRankingType[];
   gameTopRankers: Record<string, InRanker | null>;
   getGamesData: () => Promise<void>;
   getGameTopRanker: (gameId: string) => Promise<InRanker | null>;
@@ -117,10 +113,11 @@ export const useGameStore = create(
           const data = await Promise.all(
             userGames.map((game) => getGameRanking(game.game_id))
           );
-          const ranks = data.map((rankingArr) =>
-            rankingArr.find((ranking) => ranking.user_id === userId)
+          const ranks = data.flatMap(
+            (rankingArr) =>
+              rankingArr.find((ranking) => ranking.user_id === userId) || []
           );
-          set({ rankings: ranks });
+          set({ rankings: ranks || [] });
 
           const totalPlayTime = ranks.reduce((acc, rank) => {
             return acc + (rank?.total_play_time || 0);

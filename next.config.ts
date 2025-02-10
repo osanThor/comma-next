@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
         pathname: "/thumb/**",
       },
       {
+        protocol: "http",
+        hostname: "k.kakaocdn.net",
+        pathname: "/**",
+      },
+      {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
