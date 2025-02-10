@@ -1,11 +1,11 @@
-import { InUserRank } from "@/stores/gameStore";
 import Link from "next/link";
 import Avatar from "../common/Avatar";
 import formatedCount from "@/utils/formatedCount";
 import formatedTime from "@/utils/formatedTime";
+import { GameRankingType } from "@/services/game.service";
 
 type Props = {
-  item: InUserRank;
+  item: GameRankingType;
 };
 export default function UserRankingItem({ item }: Props) {
   return (
