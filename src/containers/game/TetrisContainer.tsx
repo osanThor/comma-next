@@ -311,15 +311,18 @@ export default function TetrisContainer() {
               </span>
             </p>
             <div id="sound-div">
-              <span className="cursor-pointer" id="sound-speaker"></span>
-              <span className="cursor-pointer" id="sound-description"></span>
+              <span
+                className="cursor-pointer sound-item"
+                id="sound-speaker"
+              ></span>
+              <span
+                className="cursor-pointer sound-item"
+                id="sound-description"
+              ></span>
             </div>
             <canvas id="next" className="next"></canvas>
           </div>
-          <div id="sound-div">
-            <span className="cursor-pointer" id="sound-speaker"></span>
-            <span className="cursor-pointer" id="sound-description"></span>
-          </div>
+
           <button
             onClick={handleClickPlay}
             className={twMerge(
