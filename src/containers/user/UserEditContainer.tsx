@@ -87,7 +87,6 @@ export default function UserEditContainer() {
 
   useEffect(() => {
     if (user) {
-      console.log(user.email);
       setName(user.name);
       setEmail(user.email);
       setBio(user.bio || "");

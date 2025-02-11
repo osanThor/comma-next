@@ -7,7 +7,11 @@ export default function useTimer() {
 
   const start = () => {
     if (timerIdRef.current) return;
-    startTimeRef.current = Date.now() - currentTime;
+    if (!startTimeRef.current) {
+      startTimeRef.current = Date.now();
+    } else {
+      startTimeRef.current = Date.now() - currentTime;
+    }
     timerIdRef.current = setInterval(() => {
       setCurrentTime(Date.now() - startTimeRef.current);
     }, 100);
@@ -20,12 +24,13 @@ export default function useTimer() {
   };
 
   const reset = () => {
-    start();
+    stop();
     setCurrentTime(0);
+    startTimeRef.current = 0;
   };
 
   useEffect(() => {
-    return () => stop(); // 컴포넌트 언마운트 시 타이머 정리
+    return () => reset();
   }, []);
 
   return { currentTime, start, stop, reset };

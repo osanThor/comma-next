@@ -82,3 +82,17 @@ body {
 .swiper-pagination {
   bottom: 20px !important;
 }
+
+.tetris-grid {
+  display: grid;
+  grid-template-columns: 120px 400px 120px;
+}
+.tetris-game-board {
+  border: solid 2px white;
+  border-radius: 8px;
+  box-shadow: 0 0 7px #fff, 0 0 10px #a5087d, 0 0 21px #a5087d;
+}
+
+#sound-speaker {
+  font-size: 30px;
+}
