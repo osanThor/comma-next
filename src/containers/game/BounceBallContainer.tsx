@@ -2,7 +2,7 @@
 
 import useTimer from "@/hooks/timer";
 import formatedTime from "@/utils/formatedTime";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   GAME_WIDTH,
   GAME_HEIGHT,
@@ -194,14 +194,17 @@ export default function BounceBallContainer() {
   }, [isGameOver, score]);
 
   useEffect(() => {
+    const handleMouseMoveEvent = (e: MouseEvent) =>
+      handleMouseMove(e as unknown as React.MouseEvent<HTMLDivElement>);
+
     gameContainerRef.current?.addEventListener(
       "mousemove",
-      handleMouseMove as any
+      handleMouseMoveEvent
     );
     return () => {
       gameContainerRef.current?.removeEventListener(
         "mousemove",
-        handleMouseMove as any
+        handleMouseMoveEvent
       );
     };
   }, [isPlaying]);

@@ -10,7 +10,7 @@ export default class Sound {
   }
 
   create(src: string, id: string, loop: boolean = false): HTMLAudioElement {
-    let audio = document.createElement("audio");
+    const audio = document.createElement("audio");
     audio.src = src;
     audio.id = id;
     audio.muted = true;
@@ -25,8 +25,8 @@ export default class Sound {
   }
 
   soundSetting(): void {
-    let soundItems = document.querySelectorAll<HTMLElement>(".sound-item");
-    for (let soundItem of soundItems) {
+    const soundItems = document.querySelectorAll<HTMLElement>(".sound-item");
+    for (const soundItem of soundItems) {
       soundItem.addEventListener("click", () => {
         this.muteToggle();
       });
@@ -36,7 +36,7 @@ export default class Sound {
   muteToggle(): void {
     this.muted = !this.muted;
 
-    for (let sound of this.sounds) {
+    for (const sound of this.sounds) {
       sound.muted = this.muted;
     }
 
@@ -53,13 +53,13 @@ export default class Sound {
   }
 
   pause(): void {
-    for (let sound of this.sounds) {
+    for (const sound of this.sounds) {
       sound.pause();
     }
   }
 
   play(): void {
-    for (let sound of this.sounds) {
+    for (const sound of this.sounds) {
       sound.play();
     }
   }

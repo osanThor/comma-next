@@ -83,7 +83,7 @@ export default class Board {
     time: Time,
     pointsSound: HTMLAudioElement
   ): boolean {
-    let p = moves[KEY.DOWN](this.piece) as Piece;
+    const p = moves[KEY.DOWN](this.piece) as Piece;
     if (this.valid(p)) {
       this.piece.move(p);
     } else {
@@ -146,8 +146,8 @@ export default class Board {
   valid(p: Piece): boolean {
     return p.shape.every((row, dy) =>
       row.every((value, dx) => {
-        let x = p.x + dx;
-        let y = p.y + dy;
+        const x = p.x + dx;
+        const y = p.y + dy;
         return (
           value === 0 || (this.isInsideWalls(x, y) && this.notOccupied(x, y))
         );
@@ -237,7 +237,7 @@ export default class Board {
   }
 
   rotate(piece: Piece, direction: string): Piece {
-    let p = JSON.parse(JSON.stringify(piece)) as Piece;
+    const p = JSON.parse(JSON.stringify(piece)) as Piece;
 
     if (!piece.hardDropped) {
       for (let y = 0; y < p.shape.length; ++y) {
