@@ -13,7 +13,7 @@ export function useBackgroundMusic() {
     gameMusic.currentTime = 0;
   };
 
-  const setMute = (isMuted) => {
+  const setMute = (isMuted: boolean) => {
     gameMusic.muted = isMuted;
   };
 
