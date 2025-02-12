@@ -232,27 +232,28 @@ export default function TetrisContainer() {
     const soundEl = new Sound(
       document.querySelector("#sound-div") as HTMLElement
     );
-    (backgroundSound.current = soundEl.create(
+    backgroundSound.current = soundEl.create(
       "/assets/sounds/Dungeon_Theme.mp3",
       "background_sound",
       true
-    )),
-      (movesSound.current = soundEl.create(
-        "/assets/sounds/moves.mp3",
-        "moves_sound"
-      )),
-      (dropSound.current = soundEl.create(
-        "/assets/sounds/drop.mp3",
-        "drop_sound"
-      )),
-      (pointsSound.current = soundEl.create(
-        "/assets/sounds/points.mp3",
-        "points_sound"
-      )),
-      (finishSound.current = soundEl.create(
-        "/assets/sounds/finish.mp3",
-        "finish_sound"
-      ));
+    );
+
+    movesSound.current = soundEl.create(
+      "/assets/sounds/moves.mp3",
+      "moves_sound"
+    );
+
+    dropSound.current = soundEl.create("/assets/sounds/drop.mp3", "drop_sound");
+
+    pointsSound.current = soundEl.create(
+      "/assets/sounds/points.mp3",
+      "points_sound"
+    );
+
+    finishSound.current = soundEl.create(
+      "/assets/sounds/finish.mp3",
+      "finish_sound"
+    );
     soundEl.muteToggle();
     soundEl.soundSetting();
     sound.current = soundEl;

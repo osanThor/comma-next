@@ -1,6 +1,7 @@
 import { SCALE_FACTOR } from "@/constants/flappy";
+import { KAPLAYCtx } from "kaplay";
 
-export function makeBackground(k: any) {
+export function makeBackground(k: KAPLAYCtx) {
   // 하늘
   const sky = k.add([
     k.sprite("sky"),
