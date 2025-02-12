@@ -26,7 +26,7 @@ export default function GameBanner({ gameName }: Props) {
           {GAME_NAME_MAP[gameName].join("\n") || gameName}
         </h1>
         <Link
-          href={`/game/${gameName}`}
+          href={`/game/${gameName}/play`}
           className="group rounded-[60px] text-main-500 hover:text-point-500 bg-point-500 px-5 py-3 relative -translate-x-1 hover:bg-white flex items-center justify-center gap-[6px] transition-transform hover:scale-105"
         >
           <svg

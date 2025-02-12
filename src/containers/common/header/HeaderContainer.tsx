@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import NotificationContainer from "./NotificationContainer";
 import SideMenuContainer from "./SideMenuContainer";
+import LoginIcon from "@/components/common/icons/LoginIcon";
 
 export default function HeaderContainer() {
   const user = useAuthStore((state) => state.user);
@@ -53,13 +54,23 @@ export default function HeaderContainer() {
             </Link>
           </h1>
           <div className="flex items-center gap-4">
-            {user && (
-              <Link href={`/user/${user.id}/post`}>
-                <Avatar src={user.profile_image} size="sm" />
+            {user ? (
+              <>
+                <Link href={`/user/${user.id}/post`}>
+                  <Avatar src={user.profile_image} size="sm" />
+                </Link>
+                <NotificationContainer />
+                <SideMenuContainer />
+              </>
+            ) : (
+              <Link
+                href={"/login"}
+                className="text-white/80 transition-all text-sm hover:text-white flex items-center gap-1 leading-3 font-semibold"
+              >
+                <LoginIcon />
+                로그인
               </Link>
             )}
-            <NotificationContainer />
-            <SideMenuContainer />
           </div>
         </div>
       </header>

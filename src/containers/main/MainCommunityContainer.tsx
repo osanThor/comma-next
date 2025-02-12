@@ -7,7 +7,9 @@ import PostSkeleton from "@/components/common/PostSkeleton";
 import TitleLeft from "@/components/common/icons/TitleLeft";
 import TitleRight from "@/components/common/icons/TitleRight";
 import usePosts from "@/hooks/posts";
-import Link from "next/link";
+import { useAuthStore } from "@/stores/authStore";
+import { useModalStore } from "@/stores/modalStore";
+import { useRouter } from "next/navigation";
 
 const SORT_OPTIONS = [
   { name: "인기순", value: "likes" },
@@ -20,6 +22,21 @@ export default function MainCommunityContainer() {
     12
   );
 
+  const router = useRouter();
+
+  const user = useAuthStore((state) => state.user);
+  const openModal = useModalStore((state) => state.openModal);
+
+  const handleClickPost = () => {
+    if (user) {
+      router.push("/post/write?category=free");
+    } else {
+      openModal("로그인이 필요한 서비스에요.", "로그인하기", () =>
+        router.push("/login")
+      );
+    }
+  };
+
   return (
     <section className="w-[calc(100%-40px)] max-w-[1440px] flex flex-col items-center contents-box py-10 md:py-[83px] mb-10">
       <h2 className="flex flex-col items-center text-2xl md:text-4xl font-dnf text-white relative mb-[30px]">
@@ -28,12 +45,12 @@ export default function MainCommunityContainer() {
         COMMUNITY
         <TitleRight className="hidden sm:block scale-50 md:scale-100 h-10 absolute left-[calc(100%-30px)] md:left-[calc(100%+28px)] bottom-0" />
       </h2>
-      <Link
-        href="/post/write?category=free"
+      <button
+        onClick={handleClickPost}
         className="w-[258px] h-12 flex items-center justify-center bg-white hover:bg-point-500 rounded-full text-xl font-dnf transition-all mb-2"
       >
         글 쓰러 가기
-      </Link>
+      </button>
       <div className="w-[calc(100%-40px)] max-w-[970px] flex flex-col">
         <div className="w-full flex items-center justify-end ">
           <Filter sort={sort} sortOption={SORT_OPTIONS} onChange={changeSort} />

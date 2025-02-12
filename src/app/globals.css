@@ -82,3 +82,84 @@ body {
 .swiper-pagination {
   bottom: 20px !important;
 }
+
+.tetris-grid {
+  display: grid;
+  grid-template-columns: 120px 400px 120px;
+}
+.tetris-game-board {
+  border: solid 2px white;
+  border-radius: 8px;
+  box-shadow: 0 0 7px #fff, 0 0 10px #a5087d, 0 0 21px #a5087d;
+}
+
+#sound-speaker {
+  font-size: 30px;
+}
+
+/* Grid 컨테이너 */
+#min-sweeper .grid-container {
+  display: flex;
+  align-items: center;
+}
+
+#min-sweeper .grid {
+  display: grid;
+  width: 40rem;
+  height: 26rem;
+}
+
+#min-sweeper .cell {
+  width: 26px;
+  height: 26px;
+  position: relative;
+  border-color: white;
+}
+
+#min-sweeper .cell span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#min-sweeper .blinking {
+  animation: blink 1s infinite;
+}
+
+#min-sweeper .victory-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  font-weight: bold;
+  color: gold;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px 40px;
+  border-radius: 10px;
+
+  text-align: center;
+  z-index: 1000;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 2s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}

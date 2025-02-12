@@ -2,12 +2,12 @@
 import { PostSchema, createPost, updatePost } from "@/services/post.service";
 import PostEditorContentsContainer from "./PostEditorContentsContainer";
 import PostImageContainer from "./PostImageContainer";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useToastStore } from "@/stores/toastStore";
 import { useModalStore } from "@/stores/modalStore";
 import { uploadImage } from "@/services/upload.service";
 import { useAuthStore } from "@/stores/authStore";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 type Props = {
   post?: PostSchema;
@@ -17,6 +17,8 @@ export default function PostEditorContainer({ post }: Props) {
   const router = useRouter();
 
   const user = useAuthStore((state) => state.user);
+  const isLoggedIn = useAuthStore((state) => state.isLoggedIn);
+
   const addToast = useToastStore((state) => state.addToast);
   const openModal = useModalStore((state) => state.openModal);
 
@@ -93,6 +95,12 @@ export default function PostEditorContainer({ post }: Props) {
     e.preventDefault();
     openModal("이대로 저장하시겠어요?", "저장하기", handleSavePost);
   };
+
+  useLayoutEffect(() => {
+    if (!isLoggedIn()) redirect("/login");
+    if (post && user && post.user_id !== user.id) redirect("/");
+  }, [user, post, isLoggedIn]);
+
   return (
     <div className="w-full flex flex-col h-auto lg:flex-row items-center lg:items-start justify-center gap-8 lg:px-20">
       <PostImageContainer images={images} setImages={setImages} />

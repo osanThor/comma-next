@@ -90,15 +90,16 @@ export const updateUserProfile = async (
 };
 
 supabase.auth.onAuthStateChange((event, session) => {
-  const { updateUser } = useAuthStore.getState();
   console.log("Auth event:", event);
 
   if (!session?.user) {
+    const { updateUser } = useAuthStore.getState();
     updateUser(null);
     return;
   }
 
   if (event === "SIGNED_IN") {
+    const { updateUser } = useAuthStore.getState();
     setTimeout(async () => {
       try {
         const user = await upsertUser(session.user);
@@ -121,6 +122,7 @@ supabase.auth.onAuthStateChange((event, session) => {
       }
     }, 0);
   } else if (event === "SIGNED_OUT") {
+    const { updateUser } = useAuthStore.getState();
     updateUser(null);
   }
 });

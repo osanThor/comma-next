@@ -26,8 +26,6 @@ export default function GameRankingContainer({ gameName }: Props) {
     try {
       const gameId = (await getGameByName(gameName)).id;
 
-      console.log(gameId);
-
       if (!gameId) {
         throw new Error("유효하지 않은 게임입니다");
       }

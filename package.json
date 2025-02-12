@@ -21,6 +21,7 @@
     "swiper": "^11.2.2",
     "swr": "^2.3.2",
     "tailwind-merge": "^3.0.1",
+    "ua-parser-js": "^2.0.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {

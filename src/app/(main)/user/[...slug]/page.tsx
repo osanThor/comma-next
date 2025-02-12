@@ -1,8 +1,9 @@
+import notFound from "@/app/not-found";
 import { USER_NAV_MENUS } from "@/constants/user";
 import UserRootContainer from "@/containers/user/UserRootContainer";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
@@ -14,7 +15,8 @@ export default async function UserPage({ params }: Props) {
   const userId = slug[0];
   const path = slug[1];
   if (!path) redirect(`/user/${userId}/post`);
-  if (!USER_NAV_MENUS.map((menu) => menu.value).includes(path)) notFound();
+  if (!USER_NAV_MENUS.map((menu) => menu.value).includes(path))
+    return notFound();
 
   return (
     <section className="w-[calc(100%-40px)] max-w-[1640px] min-h-[calc(100vh-140px)] mt-[100px] flex flex-col contents-box py-5 md:py-[90px] mb-10 px-4 md:px-10 lg:px-20">

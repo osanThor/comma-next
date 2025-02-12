@@ -1,9 +1,9 @@
 import Footer from "@/components/common/Footer";
 import GameBanner from "@/components/game/GameBanner";
 import GameDescription from "@/components/game/GameDescription";
-import GameCommunityContainer from "@/containers/game/GameCommunityContainer";
-import GameListContainer from "@/containers/game/GameListContainer";
-import GameRankingContainer from "@/containers/game/GameRankingContainer";
+import GameCommunityContainer from "@/containers/game-view/GameCommunityContainer";
+import GameListContainer from "@/containers/game-view/GameListContainer";
+import GameRankingContainer from "@/containers/game-view/GameRankingContainer";
 
 type Props = {
   params: Promise<{ name: string }>;
