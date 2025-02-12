@@ -38,6 +38,17 @@ export default function ShootingContainer() {
 
   const images = useRef<{ [key: string]: HTMLImageElement }>({});
 
+  const currentTimeRef = useRef(currentTime);
+  const scoreRef = useRef(score);
+
+  useEffect(() => {
+    currentTimeRef.current = currentTime;
+  }, [currentTime]);
+
+  useEffect(() => {
+    scoreRef.current = score;
+  }, [score]);
+
   useEffect(() => {
     const loadImage = (key: string, src: string) => {
       const img = new Image();
@@ -56,27 +67,6 @@ export default function ShootingContainer() {
       loadImage("bullet", IMAGE_PATHS.bullet);
       loadImage("enemy", IMAGE_PATHS.enemy);
     }
-  }, []);
-
-  // Handle keyboard input
-  const handleKeyDown = (event: KeyboardEvent) => {
-    keysDown.current[event.key] = true;
-  };
-
-  const handleKeyUp = (event: KeyboardEvent) => {
-    delete keysDown.current[event.key];
-    if (event.key === " ") {
-      createBullet();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    };
   }, []);
 
   const createBullet = () => {
@@ -157,8 +147,8 @@ export default function ShootingContainer() {
     );
     ctx.fillStyle = "white";
     ctx.font = "20px arial";
-    ctx.fillText(`PLAY TIME: ${formatedTime(currentTime)}`, 160, 20);
-    ctx.fillText(`SCORE: ${score}`, 20, 20);
+    ctx.fillText(`PLAY TIME: ${formatedTime(currentTimeRef.current)}`, 160, 20);
+    ctx.fillText(`SCORE: ${scoreRef.current}`, 20, 20);
 
     Bullet.bulletList.forEach((bullet) => {
       if (bullet.alive) {
@@ -185,8 +175,7 @@ export default function ShootingContainer() {
     } else {
       stop();
       stopAllMusic();
-      console.log("gameOver", score, currentTime);
-      // onGameOver(score, currentTime);
+      console.log("gameOver", scoreRef.current, currentTimeRef.current);
       if (requestId.current) cancelAnimationFrame(requestId.current);
     }
   };
@@ -202,13 +191,37 @@ export default function ShootingContainer() {
     start();
     requestId.current = requestAnimationFrame(main);
   };
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    keysDown.current[event.key] = true;
+  };
+
+  const handleKeyUp = (event: KeyboardEvent) => {
+    delete keysDown.current[event.key];
+    if (event.key === " ") {
+      createBullet();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+      stop();
+      stopAllMusic();
+    };
+  }, []);
+
   return (
     <div className="relative w-full h-full bg-cover bg-center bg-[url(/assets/images/bg/shoot-bg.png)]">
       <div
-        className="relative w-[500px] h-[700px] mx-auto"
+        className="relative w-[500px] h-[700px] mx-auto transition-all"
         style={{
-          boxShadow:
-            "0 0 7px #fff, 0 0 10px rgb(0, 100, 200), 0 0 21px rgb(0, 100, 200)",
+          boxShadow: !playButtonVisible
+            ? "0 0 7px #fff, 0 0 10px rgb(0, 100, 200), 0 0 21px rgb(0, 100, 200)"
+            : "",
         }}
       >
         <canvas ref={canvasRef} className="w-full h-full"></canvas>
@@ -241,6 +254,9 @@ export default function ShootingContainer() {
         )}
         <button
           onClick={toggleMute}
+          onKeyDown={(e) => {
+            e.preventDefault();
+          }}
           // @keydown.space.prevent="(e) => e.target.blur"
           className="absolute top-0 right-1 focus:outline-none"
         >
