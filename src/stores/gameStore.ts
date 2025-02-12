@@ -27,11 +27,15 @@ interface InGameStore {
   playTime: number;
   rankings: GameRankingType[];
   gameTopRankers: Record<string, InRanker | null>;
+  gamePayload: { score: number; playTime: number } | null;
   getGamesData: () => Promise<void>;
   getGameTopRanker: (gameId: string) => Promise<InRanker | null>;
   getGameTopRankers: () => Promise<void>;
   getUserGameScores: (userId: string) => Promise<void>;
   getRankings: (userId: string) => Promise<void>;
+  updateGamePayload: (
+    payload: { score: number; playTime: number } | null
+  ) => void;
 }
 
 export const useGameStore = create(
@@ -48,6 +52,7 @@ export const useGameStore = create(
         tetris: null,
         shooting: null,
       },
+      gamePayload: null,
       getGamesData: async () => {
         try {
           const data = await getGames();
@@ -127,6 +132,9 @@ export const useGameStore = create(
         } catch (err) {
           console.error(err);
         }
+      },
+      updateGamePayload: (gamePayload) => {
+        set({ gamePayload });
       },
     }),
     {

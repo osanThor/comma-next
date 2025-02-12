@@ -16,8 +16,11 @@ import Board from "@/classes/tetris/board";
 import Sound from "@/classes/tetris/sound";
 import Piece from "@/classes/tetris/piece";
 import formatedTime from "@/utils/formatedTime";
+import { useGameStore } from "@/stores/gameStore";
 
 export default function TetrisContainer() {
+  const updateGamePayload = useGameStore((state) => state.updateGamePayload);
+
   const { currentTime, start, stop, reset } = useTimer();
 
   const [account, setAccount] = useState({ score: 0, level: 0, lines: 0 });
@@ -266,6 +269,7 @@ export default function TetrisContainer() {
   useEffect(() => {
     if (isGameOver) {
       console.log("gameOver", account.score, currentTime);
+      updateGamePayload({ score: account.score, playTime: currentTime });
     }
   }, [isGameOver, account, currentTime]);
 

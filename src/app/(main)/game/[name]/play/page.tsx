@@ -1,4 +1,5 @@
 import notFound from "@/app/not-found";
+import GameOverModalContainer from "@/containers/game-over/GameOverModalContainer";
 import BounceBallContainer from "@/containers/game/BounceBallContainer";
 import FlappyBooContainer from "@/containers/game/FlappyBooContainer";
 import MineSweeperContainer from "@/containers/game/MineSweeperContainer";
@@ -32,19 +33,13 @@ export default async function GamePlayPage({ params }: Props) {
           <div className="w-full h-full bg-main-600 flex items-center justify-center text-center font-bold text-white leading-9">
             ｡°(っ°´o`°ｃ)°｡
             <br />
-            PC로 다시 접속해주세요..
+            <b>PC</b>로 다시 접속해주세요..
           </div>
         ) : (
           <>{GAME_CONTAINERS[gameName]}</>
         )}
-        {/* <div className="fixed inset-0 flex justify-center items-center bg-main-800/40 z-50 pt-10">
-          <game-over-modal
-        :play-time="playTime"
-        :score="score"
-        :game-result="gameResult"
-      ></game-over-modal>
-        </div> */}
       </section>
+      <GameOverModalContainer gameName={gameName} />
     </div>
   );
 }
