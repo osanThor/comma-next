@@ -1,20 +1,35 @@
-export function useBackgroundMusic() {
-  const gameMusic = new Audio("/assets/sounds/shooting-game-music.mp3");
+"use client";
 
-  gameMusic.loop = true;
-  gameMusic.volume = 0.5;
+import { useRef, useEffect } from "react";
+
+export default function useBackgroundMusic() {
+  const gameMusicRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      gameMusicRef.current = new Audio(
+        "/assets/sounds/shooting-game-music.mp3"
+      );
+      gameMusicRef.current.loop = true;
+      gameMusicRef.current.volume = 0.5;
+    }
+  }, []);
 
   const playGameMusic = () => {
-    gameMusic.play();
+    gameMusicRef.current?.play();
   };
 
   const stopAllMusic = () => {
-    gameMusic.pause();
-    gameMusic.currentTime = 0;
+    if (gameMusicRef.current) {
+      gameMusicRef.current.pause();
+      gameMusicRef.current.currentTime = 0;
+    }
   };
 
   const setMute = (isMuted: boolean) => {
-    gameMusic.muted = isMuted;
+    if (gameMusicRef.current) {
+      gameMusicRef.current.muted = isMuted;
+    }
   };
 
   return {

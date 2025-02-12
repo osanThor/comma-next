@@ -2,6 +2,7 @@ import supabase from "@/lib/supabase/client";
 import { useAuthStore } from "@/stores/authStore";
 import { useToastStore } from "@/stores/toastStore";
 import { AuthError, User } from "@supabase/supabase-js";
+import { redirect, useRouter } from "next/navigation";
 
 // 로그인
 export const loginWithSocial = async (provider: "google" | "kakao") => {
@@ -90,15 +91,16 @@ export const updateUserProfile = async (
 };
 
 supabase.auth.onAuthStateChange((event, session) => {
-  const { updateUser } = useAuthStore.getState();
   console.log("Auth event:", event);
 
   if (!session?.user) {
+    const { updateUser } = useAuthStore.getState();
     updateUser(null);
-    return;
+    redirect("/login");
   }
 
   if (event === "SIGNED_IN") {
+    const { updateUser } = useAuthStore.getState();
     setTimeout(async () => {
       try {
         const user = await upsertUser(session.user);
@@ -121,6 +123,8 @@ supabase.auth.onAuthStateChange((event, session) => {
       }
     }, 0);
   } else if (event === "SIGNED_OUT") {
+    const { updateUser } = useAuthStore.getState();
     updateUser(null);
+    redirect("/login");
   }
 });

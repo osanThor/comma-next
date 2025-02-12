@@ -1,8 +1,8 @@
-export function generateRandomValue(min, max) {
+export function generateRandomValue(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export function formatPlayTime(milliseconds) {
+export function formatPlayTime(milliseconds: number) {
   if (!milliseconds || isNaN(milliseconds)) {
     return "00:00:000";
   }

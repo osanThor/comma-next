@@ -1,18 +1,21 @@
 import LoginContainer from "@/containers/auth/LoginContainer";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function page() {
   return (
     <main className="bg-size relative bg-login bg-center font-pretendard">
       <section className="absolute w-[calc(100%-32px)] max-w-[840px] h-[557px] p-5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 contents-box">
         <h1 className="mb-[60px] w-[calc(100%-100px)] flex items-center justify-center">
-          <Image
-            className="object-cover w-full max-w-[408px]"
-            src="/assets/images/main-title.png"
-            alt="logo"
-            width={408}
-            height={148}
-          />
+          <Link href={"/"} className="w-full max-w-[408px]">
+            <Image
+              className="object-cover w-full"
+              src="/assets/images/main-title.png"
+              alt="logo"
+              width={408}
+              height={148}
+            />
+          </Link>
         </h1>
         <LoginContainer />
       </section>

@@ -8,10 +8,12 @@ import {
 } from "@/constants/shooting";
 
 export class Enemy {
-  static enemyList = [];
-  static isGameOver = false;
+  static enemyList: Enemy[] = [];
+  static isGameOver: boolean = false;
+  x: number;
+  y: number;
 
-  constructor(generateRandomValue) {
+  constructor(generateRandomValue: (min: number, max: number) => number) {
     this.x = generateRandomValue(
       ENEMY_BOX_PADDING,
       CANVAS_WIDTH - ENEMY_WIDTH - ENEMY_BOX_PADDING
@@ -21,7 +23,7 @@ export class Enemy {
     Enemy.enemyList.push(this);
   }
 
-  update(deltaTime) {
+  update(deltaTime: number) {
     // deltaTime 적용: ENEMY_SPEED * deltaTime
     this.y += ENEMY_SPEED * deltaTime;
 
