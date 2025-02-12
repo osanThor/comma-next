@@ -2,7 +2,7 @@
 import { PostSchema, createPost, updatePost } from "@/services/post.service";
 import PostEditorContentsContainer from "./PostEditorContentsContainer";
 import PostImageContainer from "./PostImageContainer";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useToastStore } from "@/stores/toastStore";
 import { useModalStore } from "@/stores/modalStore";
 import { uploadImage } from "@/services/upload.service";

@@ -18,7 +18,7 @@ import formatedTime from "@/utils/formatedTime";
 import { generateRandomValue } from "@/classes/shooting/utils";
 
 export default function ShootingContainer() {
-  const { currentTime, start, stop, reset } = useTimer();
+  const { currentTime, start, stop } = useTimer();
   const { playGameMusic, stopAllMusic, setMute } = useBackgroundMusic();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);

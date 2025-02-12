@@ -2,7 +2,7 @@ import supabase from "@/lib/supabase/client";
 import { useAuthStore } from "@/stores/authStore";
 import { useToastStore } from "@/stores/toastStore";
 import { AuthError, User } from "@supabase/supabase-js";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 // 로그인
 export const loginWithSocial = async (provider: "google" | "kakao") => {
