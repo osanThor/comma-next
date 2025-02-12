@@ -52,7 +52,7 @@ export default function UserEditContainer() {
   const handleUpdateUser = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      if (!user) return addToast("다시 로그인해주세요.", "error");
+      if (!user) return addToast("로그인해주세요.", "error");
       if (!name) return addToast("닉네임을 입력해주세요.", "error");
       if (name.length > 10)
         return addToast("닉네임은 최대 10자까지에요.", "error");
