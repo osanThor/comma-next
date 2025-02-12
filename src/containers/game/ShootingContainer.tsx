@@ -17,11 +17,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import formatedTime from "@/utils/formatedTime";
 import { generateRandomValue } from "@/classes/shooting/utils";
 import { useGameStore } from "@/stores/gameStore";
+import { default as NextImage } from "next/image";
 
 export default function ShootingContainer() {
   const updateGamePayload = useGameStore((state) => state.updateGamePayload);
 
-  const { currentTime, start, stop } = useTimer();
+  const { currentTime, start, stop, reset } = useTimer();
   const { playGameMusic, stopAllMusic, setMute } = useBackgroundMusic();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -57,7 +58,6 @@ export default function ShootingContainer() {
       const img = new Image();
       img.src = src;
       images.current[key] = img;
-      images.current[key].onload = () => {};
     };
 
     if (canvasRef.current) {
@@ -148,6 +148,7 @@ export default function ShootingContainer() {
       spaceshipX.current,
       spaceshipY.current
     );
+
     ctx.fillStyle = "white";
     ctx.font = "20px arial";
     ctx.fillText(`PLAY TIME: ${formatedTime(currentTimeRef.current)}`, 160, 20);
@@ -166,7 +167,7 @@ export default function ShootingContainer() {
 
   let lastFrameTime = 0;
 
-  const main = (timestamp: number) => {
+  const main = (timestamp: number = 0) => {
     if (!lastFrameTime) lastFrameTime = timestamp;
     const deltaTime = (timestamp - lastFrameTime) / 1000;
     lastFrameTime = timestamp;
@@ -196,7 +197,7 @@ export default function ShootingContainer() {
 
     createEnemy();
     start();
-    requestId.current = requestAnimationFrame(main);
+    main();
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -212,14 +213,37 @@ export default function ShootingContainer() {
     }
   };
 
+  const resetGame = () => {
+    setScore(0);
+    setPlayButtonVisible(true);
+    Enemy.isGameOver = false;
+    Enemy.enemyList = [];
+    Bullet.bulletList = [];
+
+    spaceshipX.current = CANVAS_WIDTH / 2 - SPACESHIP_INITIAL_X_OFFSET;
+    spaceshipY.current = CANVAS_HEIGHT - SPACESHIP_HEIGHT;
+
+    stop();
+    reset();
+    stopAllMusic();
+
+    if (ctxRef.current) {
+      ctxRef.current.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    }
+    console.log(enemyIntervalId.current, requestId.current);
+    if (enemyIntervalId.current) clearInterval(enemyIntervalId.current);
+    if (requestId.current) cancelAnimationFrame(requestId.current);
+    document.removeEventListener("keydown", handleKeyDown);
+    document.removeEventListener("keyup", handleKeyUp);
+  };
+
   useEffect(() => {
+    resetGame();
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-      stop();
-      stopAllMusic();
+      resetGame();
+      window.location.reload();
     };
   }, []);
 
@@ -253,10 +277,12 @@ export default function ShootingContainer() {
               // @click="startGame"
               className="w-[160px] h-[68px] overflow-hidden rounded-full transition-transform duration-200 hover:scale-105"
             >
-              <img
+              <NextImage
                 src="/assets/images/game/tetris/play.png"
                 alt="play button image"
                 className="mt-[-44px]"
+                width={160}
+                height={160}
               />
             </button>
           </div>

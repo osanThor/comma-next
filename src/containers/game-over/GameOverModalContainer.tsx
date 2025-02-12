@@ -8,6 +8,7 @@ import GameOverInfoContainer from "./GameOverInfoContainer";
 import { useToastStore } from "@/stores/toastStore";
 import html2canvas from "html2canvas";
 import GameOverShareContainer from "./GameOverShareContainer";
+import GameOverNotUserContainer from "./GameOverNotUserContainer";
 
 type Props = {
   gameName: string;
@@ -28,10 +29,14 @@ export default function GameOverModalContainer({ gameName }: Props) {
     { file: File; preview: string }[]
   >([]);
 
-  const handleClose = () => {
+  const handleRest = () => {
     setGameResult("");
     updateGamePayload(null);
     setIsShare(false);
+  };
+
+  const handleClose = () => {
+    handleRest();
     window.location.reload();
   };
 
@@ -96,12 +101,11 @@ export default function GameOverModalContainer({ gameName }: Props) {
       setGameResult(updateResult);
     };
     handleGameOver();
-    return () => {
-      setGameResult("");
-      updateGamePayload(null);
-      setIsShare(false);
-    };
   }, [gamePayload]);
+
+  useEffect(() => {
+    handleRest();
+  }, []);
 
   return (
     <>
@@ -110,7 +114,9 @@ export default function GameOverModalContainer({ gameName }: Props) {
           <div className="relative w-[calc(100%-40px)] max-w-[530px] h-[calc(100%-40px)] max-h-[748px] border-4 border-white rounded-[28px] bg-main-500">
             <div className="w-full h-full overflow-y-auto">
               {!user ? (
-                <></>
+                <>
+                  <GameOverNotUserContainer onClose={handleClose} />
+                </>
               ) : !isShare ? (
                 <>
                   {gameId && (

@@ -5,6 +5,7 @@ import GameRankItem from "@/components/game/GameRankItem";
 import { GameRankingType, getGameRanking } from "@/services/game.service";
 import { useAuthStore } from "@/stores/authStore";
 import { useGameStore } from "@/stores/gameStore";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 type Props = {
@@ -121,7 +122,12 @@ export default function GameOverInfoContainer({
         className="absolute top-3 right-3 opacity-50 hover:opacity-100"
         onClick={onClose}
       >
-        <img src="/assets/images/icons/close-icon.svg" alt="닫기" />
+        <Image
+          src="/assets/images/icons/close-icon.svg"
+          alt="닫기"
+          width={40}
+          height={40}
+        />
       </button>
       <div className="mt-[64px] flex justify-center">
         <h1 className="text-3xl sm:text-4xl md:text-[44px] text-point-500 font-dnf">
