@@ -2,7 +2,6 @@ import supabase from "@/lib/supabase/client";
 import { useAuthStore } from "@/stores/authStore";
 import { useToastStore } from "@/stores/toastStore";
 import { AuthError, User } from "@supabase/supabase-js";
-import { redirect } from "next/navigation";
 
 // 로그인
 export const loginWithSocial = async (provider: "google" | "kakao") => {
@@ -96,7 +95,7 @@ supabase.auth.onAuthStateChange((event, session) => {
   if (!session?.user) {
     const { updateUser } = useAuthStore.getState();
     updateUser(null);
-    redirect("/login");
+    return;
   }
 
   if (event === "SIGNED_IN") {
@@ -125,6 +124,5 @@ supabase.auth.onAuthStateChange((event, session) => {
   } else if (event === "SIGNED_OUT") {
     const { updateUser } = useAuthStore.getState();
     updateUser(null);
-    redirect("/login");
   }
 });
