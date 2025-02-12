@@ -5,7 +5,6 @@ import GameRankItem from "@/components/game/GameRankItem";
 import { GameRankingType, getGameRanking } from "@/services/game.service";
 import { useAuthStore } from "@/stores/authStore";
 import { useGameStore } from "@/stores/gameStore";
-import { useToastStore } from "@/stores/toastStore";
 import { useState, useEffect } from "react";
 
 type Props = {
@@ -22,7 +21,6 @@ export default function GameOverInfoContainer({
   onShare,
 }: Props) {
   const user = useAuthStore((state) => state.user);
-  const addToast = useToastStore((state) => state.addToast);
   const gamePayload = useGameStore((state) => state.gamePayload);
 
   const [filteredRankings, setFilteredRankings] = useState<
@@ -175,7 +173,7 @@ export default function GameOverInfoContainer({
           </div>
         </div>
       </div>
-      <section className="w-full flex flex-col items-center my-12">
+      <div className="w-full flex flex-col items-center my-12">
         <div className="w-[calc(100%-32px)] flex flex-row items-center justify-center gap-4 md:gap-8">
           <button
             onClick={onClose}
@@ -192,7 +190,7 @@ export default function GameOverInfoContainer({
             SHARE
           </button>
         </div>
-      </section>
+      </div>
     </>
   );
 }

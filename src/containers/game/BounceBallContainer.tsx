@@ -11,8 +11,12 @@ import {
   SPEED_INCREASE,
   BALL_SIZE,
 } from "@/constants/bounceBall";
+import { useGameStore } from "@/stores/gameStore";
+import Image from "next/image";
 
 export default function BounceBallContainer() {
+  const updateGamePayload = useGameStore((state) => state.updateGamePayload);
+
   const [paddlePosition, setPaddlePosition] = useState(GAME_WIDTH / 2 - 50);
   const [ballX, setBallX] = useState(GAME_WIDTH / 2);
   const [ballY, setBallY] = useState(50);
@@ -28,7 +32,7 @@ export default function BounceBallContainer() {
 
   const isPlayingRef = useRef(false);
 
-  const { currentTime, start, stop } = useTimer();
+  const { currentTime, start, stop, reset } = useTimer();
   const gameContainerRef = useRef<HTMLDivElement | null>(null);
   const animationFrameId = useRef<number | null>(null);
   const lastTime = useRef<number>(0);
@@ -37,6 +41,23 @@ export default function BounceBallContainer() {
   const ballSound = useRef<HTMLAudioElement>(null);
   const paddleSound = useRef<HTMLAudioElement>(null);
   const laserSound = useRef<HTMLAudioElement>(null);
+
+  const resetGame = () => {
+    cleanupGame();
+    paddleCollisionProcessed.current = false; // 게임 리셋시 플래그 초기화
+    setScore(0);
+    setBallX(GAME_WIDTH / 2);
+    setBallY(50);
+    ballXRef.current = GAME_WIDTH / 2;
+    ballYRef.current = 50;
+    // 초기 속도 설정을 상수 사용으로 변경
+    ballDx.current = INITIAL_BALL_DX();
+    ballDy.current = INITIAL_BALL_DY;
+    setPaddlePosition(GAME_WIDTH / 2 - 50);
+    paddlePositionRef.current = GAME_WIDTH / 2 - 50;
+    setIsGameOver(false);
+    reset();
+  };
 
   // 3. updateBall 함수 수정
   const updateBall = (timeStamp: number) => {
@@ -161,6 +182,7 @@ export default function BounceBallContainer() {
     lastTime.current = 0;
     stop();
     setIsPlaying(false);
+    isPlayingRef.current = false;
   };
 
   const togglePlay = () => {
@@ -190,7 +212,11 @@ export default function BounceBallContainer() {
   }, []);
 
   useEffect(() => {
-    if (isGameOver) console.log("gameOver", score, currentTime);
+    if (isGameOver) {
+      console.log("gameOver", score, currentTime);
+      updateGamePayload({ score, playTime: currentTime });
+      resetGame();
+    }
   }, [isGameOver, score]);
 
   useEffect(() => {
@@ -279,10 +305,12 @@ export default function BounceBallContainer() {
                 onClick={togglePlay}
                 className="w-[150px] h-[150px] transition-transform duration-200 hover:scale-105"
               >
-                <img
+                <Image
                   src="/assets/images/game/tetris/play.png"
                   alt="게임 시작"
                   className="w-full h-full object-contain"
+                  width={150}
+                  height={150}
                 />
               </button>
             </div>

@@ -5,6 +5,9 @@ import { useAuthStore } from "@/stores/authStore";
 import { useGameStore } from "@/stores/gameStore";
 import { useEffect, useState } from "react";
 import GameOverInfoContainer from "./GameOverInfoContainer";
+import { useToastStore } from "@/stores/toastStore";
+import html2canvas from "html2canvas";
+import GameOverShareContainer from "./GameOverShareContainer";
 
 type Props = {
   gameName: string;
@@ -14,20 +17,69 @@ export default function GameOverModalContainer({ gameName }: Props) {
   const user = useAuthStore((state) => state.user);
   const gamePayload = useGameStore((state) => state.gamePayload);
   const updateGamePayload = useGameStore((state) => state.updateGamePayload);
+  const addToast = useToastStore((state) => state.addToast);
+
   const [gameId, setGameId] = useState<string | null>(null);
 
   const [gameResult, setGameResult] = useState("");
 
   const [isShare, setIsShare] = useState(false);
+  const [imageBlobs, setImageBlobs] = useState<
+    { file: File; preview: string }[]
+  >([]);
 
   const handleClose = () => {
     setGameResult("");
     updateGamePayload(null);
     setIsShare(false);
+    window.location.reload();
   };
 
   const handleChangeIsShare = (newValue: boolean) => {
+    if (newValue === true) {
+      openGameShareModal();
+    }
     setIsShare(newValue);
+  };
+
+  const handleUploadImage = (newFile: { file: File; preview: string }) => {
+    setImageBlobs([newFile]);
+  };
+
+  const handleRemoveImage = () => {
+    setImageBlobs([]);
+  };
+
+  const openGameShareModal = () => {
+    const screenElement = document.querySelector(".capture") as HTMLElement;
+    if (!screenElement) {
+      addToast("캡처할 요소를 찾을 수 없어요..", "error");
+      console.error("캡처할 요소를 찾을 수 없습니다.");
+      return;
+    }
+
+    html2canvas(screenElement, {
+      useCORS: true,
+      scale: 2,
+      backgroundColor: null,
+    })
+      .then((canvas) => {
+        const imageData = canvas.toDataURL("image/jpeg");
+
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const fileName = `capture-${Date.now()}.jpeg`;
+            const file = new File([blob], fileName, { type: blob.type });
+            setImageBlobs([{ file, preview: imageData }]);
+            setIsShare(true);
+          } else {
+            console.error("Blob 생성 실패");
+          }
+        }, "image/jpeg");
+      })
+      .catch((error) => {
+        console.error("캡처 실패:", error);
+      });
   };
 
   useEffect(() => {
@@ -41,13 +93,13 @@ export default function GameOverModalContainer({ gameName }: Props) {
         gamePayload.score,
         gamePayload.playTime
       );
-
       setGameResult(updateResult);
     };
     handleGameOver();
     return () => {
       setGameResult("");
       updateGamePayload(null);
+      setIsShare(false);
     };
   }, [gamePayload]);
 
@@ -71,7 +123,15 @@ export default function GameOverModalContainer({ gameName }: Props) {
                   )}
                 </>
               ) : (
-                <></>
+                <>
+                  <GameOverShareContainer
+                    gameName={gameName}
+                    imageBlobs={imageBlobs}
+                    onUploadImg={handleUploadImage}
+                    onRemoveImg={handleRemoveImage}
+                    onCancel={() => handleChangeIsShare(false)}
+                  />
+                </>
               )}
             </div>
           </div>

@@ -4,6 +4,7 @@ import { makeBackground } from "@/classes/flappy/makeBackground";
 import { makePlayer } from "@/classes/flappy/makePlayer";
 import { SCALE_FACTOR } from "@/constants/flappy";
 import useTimer from "@/hooks/timer";
+import { useGameStore } from "@/stores/gameStore";
 import kaplay, {
   GameObj,
   KAPLAYCtx,
@@ -16,6 +17,8 @@ import { useEffect, useRef } from "react";
 
 export default function FlappyBooContainer() {
   const { currentTime, start, stop, reset } = useTimer();
+
+  const updateGamePayload = useGameStore((state) => state.updateGamePayload);
 
   const currentTimeRef = useRef(currentTime);
 
@@ -329,6 +332,7 @@ export default function FlappyBooContainer() {
           stop();
 
           console.log("gameOver", score, currentTimeRef.current);
+          updateGamePayload({ score, playTime: currentTimeRef.current });
           // emit("open-game-over", score, currentTime.value);
           reset();
         });

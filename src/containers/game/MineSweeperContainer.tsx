@@ -1,6 +1,7 @@
 "use client";
 
 import useTimer from "@/hooks/timer";
+import { useGameStore } from "@/stores/gameStore";
 import formatedTime from "@/utils/formatedTime";
 import { useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -19,6 +20,8 @@ const MINE_COUNT = 30;
 const REMAIN_TIME = 600000; // 10 minutes in ms
 
 export default function MineSweeperContainer() {
+  const updateGamePayload = useGameStore((state) => state.updateGamePayload);
+
   const { currentTime, start, stop, reset } = useTimer();
 
   const score = useRef(0);
@@ -162,6 +165,7 @@ export default function MineSweeperContainer() {
       score.current = 0;
       timeOutRef.current = setTimeout(() => {
         console.log("gameOver", score.current, currentTime);
+        updateGamePayload({ score: score.current, playTime: currentTime });
       }, 3000);
       return;
     }
@@ -226,6 +230,7 @@ export default function MineSweeperContainer() {
       timeOutRef.current = setTimeout(() => {
         setShowVictory(false);
         console.log("gameOver", score.current, currentTime);
+        updateGamePayload({ score: score.current, playTime: currentTime });
         // emits("open-game-over", account.score, currentTime.value);
       }, 3000);
     }
@@ -240,6 +245,7 @@ export default function MineSweeperContainer() {
         score.current = 0;
         setIsGameOver(true);
         console.log("gameOver", score.current, currentTime);
+        updateGamePayload({ score: score.current, playTime: currentTime });
       }
     } else {
       setIsBlinking(false);

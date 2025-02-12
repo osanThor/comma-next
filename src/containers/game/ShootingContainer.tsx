@@ -16,8 +16,11 @@ import useBackgroundMusic from "@/classes/shooting/sound";
 import { useCallback, useEffect, useRef, useState } from "react";
 import formatedTime from "@/utils/formatedTime";
 import { generateRandomValue } from "@/classes/shooting/utils";
+import { useGameStore } from "@/stores/gameStore";
 
 export default function ShootingContainer() {
+  const updateGamePayload = useGameStore((state) => state.updateGamePayload);
+
   const { currentTime, start, stop } = useTimer();
   const { playGameMusic, stopAllMusic, setMute } = useBackgroundMusic();
 
@@ -176,6 +179,10 @@ export default function ShootingContainer() {
       stop();
       stopAllMusic();
       console.log("gameOver", scoreRef.current, currentTimeRef.current);
+      updateGamePayload({
+        score: scoreRef.current,
+        playTime: currentTimeRef.current,
+      });
       if (requestId.current) cancelAnimationFrame(requestId.current);
     }
   };
