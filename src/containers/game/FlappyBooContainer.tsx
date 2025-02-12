@@ -17,6 +17,8 @@ import { useEffect, useRef } from "react";
 export default function FlappyBooContainer() {
   const { currentTime, start, stop, reset } = useTimer();
 
+  const currentTimeRef = useRef(currentTime);
+
   const gameCanvas = useRef<HTMLCanvasElement>(null);
   const audioEnabled = useRef(true);
   const isGameStarted = useRef(false);
@@ -326,7 +328,7 @@ export default function FlappyBooContainer() {
 
           stop();
 
-          console.log("gameOver", score, currentTime);
+          console.log("gameOver", score, currentTimeRef.current);
           // emit("open-game-over", score, currentTime.value);
           reset();
         });
@@ -358,6 +360,10 @@ export default function FlappyBooContainer() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    currentTimeRef.current = currentTime;
+  }, [currentTime]);
 
   return (
     <div className="game-scene">
