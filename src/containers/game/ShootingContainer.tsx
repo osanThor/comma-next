@@ -235,7 +235,6 @@ export default function ShootingContainer() {
     if (ctxRef.current) {
       ctxRef.current.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
-    console.log(enemyIntervalId.current, requestId.current);
     if (enemyIntervalId.current) clearInterval(enemyIntervalId.current);
     if (requestId.current) cancelAnimationFrame(requestId.current);
     document.removeEventListener("keydown", handleKeyDown);

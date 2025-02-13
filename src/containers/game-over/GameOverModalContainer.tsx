@@ -37,7 +37,6 @@ export default function GameOverModalContainer({ gameName }: Props) {
 
   const handleClose = () => {
     handleRest();
-    window.location.reload();
   };
 
   const handleChangeIsShare = (newValue: boolean) => {
