@@ -331,10 +331,10 @@ export default function FlappyBooContainer() {
 
           stop();
 
-          console.log("gameOver", score, currentTimeRef.current);
           updateGamePayload({ score, playTime: currentTimeRef.current });
-          // emit("open-game-over", score, currentTime.value);
           reset();
+          k.current.setGravity(0);
+          k.current.go("start");
         });
 
         k.current.setCamScale(k.current.vec2(1.2));
@@ -354,7 +354,6 @@ export default function FlappyBooContainer() {
 
       if (k.current) {
         k.current = null;
-        console.log("KAPLAY instance destroyed");
         window.location.reload();
       }
 

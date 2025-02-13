@@ -49,26 +49,28 @@ export default function UserCommentItem({ item, mutate }: Props) {
     <div className="w-full max-w-[1000px] relative group">
       <Link
         href={`/post/${item.post_id}`}
-        className="h-[70px] w-full rounded-2xl bg-main-600 flex flex-wrap items-center px-[33px]"
+        className="min-h-[70px] w-full rounded-2xl py-4 bg-main-600 flex items-start flex-col lg:flex-row flex-wrap lg:items-center px-[33px]"
       >
         <div className="min-w-[200px] flex-1 text-white text-base font-dnf max-w-32 truncate mr-10">
           {item.post.title}
         </div>
-        <div className="flex-[1.8] text-white/70 text-base font-medium max-w-[612px] truncate pr-8">
+        <div className="flex-[1.8] text-white/70 text-base font-medium lg:max-w-[612px] truncate pr-8">
           {item.content}
         </div>
-        <div className="flex-[0.6] text-gray-500 text-xs font-medium flex justify-center">
-          {formatedDate(item.created_at, "YYYY-MM-DD")}
-        </div>
-        <div className="flex items-center text-point-500 text-base w-12">
-          <SmallLike />
-          <span className="ml-1 pt-1">{totalLikes()}</span>
+        <div className="flex-1 flex flex-wrap items-center gap-2">
+          <div className="flex-[0.6] text-gray-500 text-xs font-medium flex justify-center whitespace-nowrap">
+            {formatedDate(item.created_at, "YYYY-MM-DD")}
+          </div>
+          <div className="flex items-center text-point-500 text-base w-12">
+            <SmallLike />
+            <span className="ml-1 pt-1">{totalLikes()}</span>
+          </div>
         </div>
       </Link>
       {item.user.id === user?.id && (
         <button
           onClick={handleClickDelete}
-          className="w-7 h-7 absolute bg-white rounded-full hidden group-hover:flex items-center justify-center -top-2 right-0 translate-x-4"
+          className="w-7 h-7 absolute bg-white rounded-full flex md:hidden group-hover:flex items-center justify-center top-2 right-2 lg:-top-2 rlg:ight-0 lg:translate-x-4"
         >
           <CommentDeleteIcon />
         </button>

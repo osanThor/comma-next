@@ -1,4 +1,9 @@
 import PostEditorContainer from "@/containers/post-editor/PostEditorContainer";
+import { getMetadata } from "@/utils/getMetadata";
+
+export async function generateMetadata() {
+  return getMetadata({ title: "포스트 작성" });
+}
 
 export default function PostWritePage() {
   return (

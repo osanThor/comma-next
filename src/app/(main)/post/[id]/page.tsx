@@ -4,11 +4,18 @@ import PostContentContainer from "@/containers/post/PostContentContainer";
 import PostImageContainer from "@/containers/post/PostImageContainer";
 import PostLikeContainer from "@/containers/post/PostLikeContainer";
 import { getPost } from "@/services/post.service";
+import { getMetadata } from "@/utils/getMetadata";
 import Link from "next/link";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
+
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params;
+  const data = await getPost(id);
+  return getMetadata({ title: data.title });
+}
 
 export default async function PostDetailPage({ params }: Props) {
   const { id } = await params;

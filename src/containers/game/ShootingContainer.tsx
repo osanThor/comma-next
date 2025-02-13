@@ -184,6 +184,7 @@ export default function ShootingContainer() {
         score: scoreRef.current,
         playTime: currentTimeRef.current,
       });
+      resetGame();
       if (requestId.current) cancelAnimationFrame(requestId.current);
     }
   };
@@ -195,22 +196,26 @@ export default function ShootingContainer() {
     spaceshipX.current = CANVAS_WIDTH / 2 - SPACESHIP_INITIAL_X_OFFSET;
     spaceshipY.current = CANVAS_HEIGHT - SPACESHIP_HEIGHT;
 
+    setupKeyboardListener();
     createEnemy();
     start();
     main();
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    event.preventDefault();
     keysDown.current[event.key] = true;
   };
 
   const handleKeyUp = (event: KeyboardEvent) => {
-    event.preventDefault();
     delete keysDown.current[event.key];
     if (event.key === " ") {
       createBullet();
     }
+  };
+
+  const setupKeyboardListener = () => {
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
   };
 
   const resetGame = () => {
@@ -230,7 +235,6 @@ export default function ShootingContainer() {
     if (ctxRef.current) {
       ctxRef.current.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     }
-    console.log(enemyIntervalId.current, requestId.current);
     if (enemyIntervalId.current) clearInterval(enemyIntervalId.current);
     if (requestId.current) cancelAnimationFrame(requestId.current);
     document.removeEventListener("keydown", handleKeyDown);
@@ -239,11 +243,8 @@ export default function ShootingContainer() {
 
   useEffect(() => {
     resetGame();
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
     return () => {
       resetGame();
-      window.location.reload();
     };
   }, []);
 
@@ -292,7 +293,6 @@ export default function ShootingContainer() {
           onKeyDown={(e) => {
             e.preventDefault();
           }}
-          // @keydown.space.prevent="(e) => e.target.blur"
           className="absolute top-0 right-1 focus:outline-none"
         >
           <img

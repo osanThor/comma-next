@@ -1,9 +1,14 @@
 import PostEditorContainer from "@/containers/post-editor/PostEditorContainer";
 import { getPost } from "@/services/post.service";
+import { getMetadata } from "@/utils/getMetadata";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
+
+export async function generateMetadata() {
+  return getMetadata({ title: "포스트 수정" });
+}
 
 export default async function PostEditPage({ params }: Props) {
   const { id } = await params;

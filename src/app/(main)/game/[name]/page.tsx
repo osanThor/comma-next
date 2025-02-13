@@ -4,10 +4,21 @@ import GameDescription from "@/components/game/GameDescription";
 import GameCommunityContainer from "@/containers/game-view/GameCommunityContainer";
 import GameListContainer from "@/containers/game-view/GameListContainer";
 import GameRankingContainer from "@/containers/game-view/GameRankingContainer";
+import { getGameByName } from "@/services/game.service";
+import { getMetadata } from "@/utils/getMetadata";
 
 type Props = {
   params: Promise<{ name: string }>;
 };
+
+export async function generateMetadata({ params }: Props) {
+  const { name: gameName } = await params;
+  const data = await getGameByName(gameName);
+  return getMetadata({
+    title: data.display_name,
+    ogImage: `/meta/${gameName}.png`,
+  });
+}
 
 export default async function GamePage({ params }: Props) {
   const { name: gameName } = await params;

@@ -12,7 +12,6 @@ export class Bullet {
   alive: boolean;
 
   constructor(spaceshipX: number, spaceshipY: number) {
-    console.log(spaceshipX, spaceshipY);
     this.x = spaceshipX + BULLET_X_OFFSET;
     this.y = spaceshipY;
     this.alive = true;
