@@ -37,8 +37,8 @@ export default async function GamePlayPage({ params }: Props) {
   if (!Object.keys(GAME_CONTAINERS).includes(gameName)) return notFound();
 
   return (
-    <div className="w-full flex justify-center items-center h-screen pt-[16.666vh] pb-[11.111vh] ">
-      <section className="w-[calc(100%-40px)] max-w-[1300px] h-full max-h-[700px] bg-black flex items-center justify-center rounded-3xl overflow-hidden capture">
+    <div className="w-full flex justify-center items-center h-screen py-10 ">
+      <section className="w-[calc(100%-40px)] max-w-[1300px] h-[700px] bg-black flex items-center justify-center rounded-3xl overflow-hidden capture">
         {isMobile ? (
           <div className="w-full h-full flex flex-col items-center justify-center bg-main-600 text-center font-bold text-white leading-9">
             <div>｡°(っ°´o`°ｃ)°｡</div>
