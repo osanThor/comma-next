@@ -9,8 +9,9 @@
 
 ![Thumbnail](https://github.com/user-attachments/assets/b0a56a57-818f-4b4a-9b88-ae4729d90d02)
 
-- 프로젝트 기간 : 2025-01-13 ~ 2025-02-04
-- 배포 URL : https://comma-one.vercel.app/
+- 배포 URL : https://comma.given-log.com
+- `Vue.js` 프로젝트 `Next.JS`와 `Typescript`로 마이그레이션
+- 이전 팀 프로젝트 README : https://github.com/osanThor/Comma
 
 <br>
 
@@ -22,32 +23,24 @@
 - 게임을 통해 사용자 간 소셜 연결을 지원하며, 공통된 관심사를 기반으로 한 커뮤니티 형성을 돕습니다.
 - 단순한 게임 플랫폼을 넘어 사람들과 교류하며 즐거움을 공유할 수 있는 공간을 제공합니다.
 
+
 <br>
 
 ## ⚙️ 기술 스택
 
 ![npm](https://img.shields.io/badge/npm-10.8.3-%23CB3837?logo=npm)
-![vue](https://img.shields.io/badge/vue-3.5.13-%234FC08D?logo=vuedotjs)
+![next](https://img.shields.io/badge/next-3.5.13-%23000000?logo=nextdotjs)
+![typescript](https://img.shields.io/badge/typescript-5-%233178C6?logo=typescript)
 ![tailwind](https://img.shields.io/badge/tailwind-3.4.17-%2306B6D4?logo=tailwindcss)
 
 **라이브러리**  
 ![supabase](https://img.shields.io/badge/supabase-2.6.0-%233FCF8E?logo=supabase)
 ![tailwind-merge](https://img.shields.io/badge/tailwind%20merge-2.6.0-%2306B6D4?logo=tailwindcss)
-![lodash](https://img.shields.io/badge/lodash-4.17.21-%233492FF?logo=lodash)
 ![swiper](https://img.shields.io/badge/swiper-11.1.15-%23104E8B?logo=swiper)
 
 **협업툴**  
 [![My Skills](https://skillicons.dev/icons?i=supabase,figma,github,notion&theme=light)](https://skillicons.dev)
 
-<br>
-
-## 🧑🏻‍💻👩🏻‍💻 구성원
-
-|                                                 Frontend                                                  |                                    Frontend                                     |                                                         Frontend                                                         |                                                 Frontend                                                  |                                    Frontend                                    |
-| :-------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
-| <img src="https://github.com/user-attachments/assets/ecfdea20-5919-4044-af7b-d034f8e01ce7"  width="100"/> | <img src="https://avatars.githubusercontent.com/u/165476198?v=4"  width="100"/> | <img src='https://avatars.githubusercontent.com/u/48465276?v=4,gjwjdals96,,https://github.com/gjwjdals96'  width="100"/> | <img src="https://github.com/user-attachments/assets/6a5fcc77-a8c9-488a-8a01-3f23cccdf813"  width="100"/> | <img src="https://avatars.githubusercontent.com/u/57696567?v=4"  width="100"/> |
-|                                                  이준영                                                   |                                     최보아                                      |                                                          허정민                                                          |                                                  박지운                                                   |                                     우정완                                     |
-|                                 [@osanThor](https://github.com/osanThor)                                  |                  [@swallowedB](https://github.com/swallowedB)                   |                                       [@gjwjdals96](https://github.com/gjwjdals96)                                       |                                   [@uoomif](https://github.com/uoomif)                                    |                   [@WJoungWan](https://github.com/WJoungWan)                   |
 
 <br/>
 
@@ -65,90 +58,86 @@
 <br/>
 
 ## 🗂️ 폴더 구조
-
-    📦programmers-fb
-    ┣ 📂public
-    ┃ ┣ 📂assets
-    ┃ ┃ ┣ 📂fonts
-    ┃ ┃ ┣ 📂images
-    ┃ ┃ ┃ ┣ 📂banner
-    ┃ ┃ ┃ ┣ 📂bg
-    ┃ ┃ ┃ ┃ ┗ 📂main
-    ┃ ┃ ┃ ┣ 📂game
-    ┃ ┃ ┃ ┃ ┣ 📂bounceBall
-    ┃ ┃ ┃ ┃ ┣ 📂flappy
-    ┃ ┃ ┃ ┃ ┣ 📂profile
-    ┃ ┃ ┃ ┃ ┣ 📂shooting
-    ┃ ┃ ┃ ┃ ┗ 📂tetris
-    ┃ ┃ ┃ ┣ 📂icons
-    ┃ ┃ ┃ ┗ 📂login
-    ┃ ┗ ┗ 📂sounds
-    ┣ 📂src
-    ┃ ┣ 📂classes
-    ┃ ┃ ┣ 📂flappy
-    ┃ ┃ ┣ 📂shooting
-    ┃ ┃ ┗ 📂tetris
-    ┃ ┣ 📂components
-    ┃ ┃ ┣ 📂common
-    ┃ ┃ ┃ ┗ 📂icons
-    ┃ ┃ ┣ 📂game
-    ┃ ┃ ┣ 📂game-over
-    ┃ ┃ ┣ 📂game-view
-    ┃ ┃ ┣ 📂main
-    ┃ ┃ ┣ 📂post-detail
-    ┃ ┃ ┣ 📂post-edit
-    ┃ ┃ ┗ 📂user
-    ┃ ┣ 📂constants
-    ┃ ┣ 📂hooks
-    ┃ ┣ 📂layouts
-    ┃ ┣ 📂lib
-    ┃ ┃ ┗ 📂supabase
-    ┃ ┣ 📂router
-    ┃ ┣ 📂services
-    ┃ ┣ 📂stores
-    ┃ ┣ 📂styles
-    ┗ ┗ 📂views
+  
+    📦comma
+     ┣ 📂public
+     ┃ ┣ 📂assets
+     ┃ ┃ ┣ 📂fonts
+     ┃ ┃ ┣ 📂images
+     ┃ ┃ ┃ ┣ 📂banner
+     ┃ ┃ ┃ ┣ 📂bg
+     ┃ ┃ ┃ ┃ ┗ 📂main
+     ┃ ┃ ┃ ┣ 📂game
+     ┃ ┃ ┃ ┃ ┣ 📂bounceBall
+     ┃ ┃ ┃ ┃ ┣ 📂flappy
+     ┃ ┃ ┃ ┃ ┣ 📂profile
+     ┃ ┃ ┃ ┃ ┣ 📂shooting
+     ┃ ┃ ┃ ┃ ┗ 📂tetris
+     ┃ ┃ ┃ ┣ 📂icons
+     ┃ ┃ ┃ ┗ 📂login
+     ┃ ┃ ┗ 📂sounds
+     ┃ ┗ 📂meta
+     ┗ 📂src
+       ┣ 📂app
+       ┃ ┣ 📂(auth)
+       ┃ ┃ ┗ 📂login
+       ┃ ┣ 📂(main)
+       ┃ ┃ ┣ 📂game
+       ┃ ┃ ┃ ┗ 📂[name]
+       ┃ ┃ ┃   ┗ 📂play
+       ┃ ┃ ┣ 📂post
+       ┃ ┃ ┃ ┣ 📂[id]
+       ┃ ┃ ┃ ┃ ┗ 📂edit
+       ┃ ┃ ┃ ┗ 📂write
+       ┃ ┃ ┣ 📂user
+       ┃ ┃ ┃ ┣ 📂[...slug]
+       ┃ ┃ ┃ ┗ 📂edit
+       ┣ 📂classes
+       ┃ ┣ 📂flappy
+       ┃ ┣ 📂shooting
+       ┃ ┗ 📂tetris
+       ┣ 📂components
+       ┃ ┣ 📂common
+       ┃ ┃ ┗ 📂icons
+       ┃ ┣ 📂game
+       ┃ ┣ 📂post
+       ┃ ┣ 📂post-editor
+       ┃ ┗ 📂user
+       ┣ 📂constants
+       ┣ 📂containers
+       ┃ ┣ 📂auth
+       ┃ ┣ 📂common
+       ┃ ┃ ┗ 📂header
+       ┃ ┣ 📂game
+       ┃ ┣ 📂game-over
+       ┃ ┣ 📂game-view
+       ┃ ┣ 📂main
+       ┃ ┣ 📂post
+       ┃ ┣ 📂post-editor
+       ┃ ┗ 📂user
+       ┣ 📂contexts
+       ┣ 📂hooks
+       ┣ 📂layouts
+       ┣ 📂lib
+       ┃ ┗ 📂supabase
+       ┣ 📂services
+       ┣ 📂stores
+       ┣ 📂types
+       ┗ 📂utils
 
 <br/>
 
-## ✏️ 코드 스타일
+## 🔨 업그레이드
 
-콤마(Comma)는 VUE 코드 스타일 가이드를 준수하여 개발하였습니다.
+### SEO 
 
-### 우선 순위 A - 필수
 
-#### 1. 멀티 워드 컴포넌트 이름
-
-```vue
-<template>
-  <main-card-section></main-card-section>
-  <main-game-community-section></main-game-community-section>
-  <main-community-section></main-community-section>
-  <base-footer></base-footer>
-</template>
-```
-
-#### 2. 상세한 PROP 정의 사용
-
-![스크린샷 2025-02-04 오전 11 24 47](https://github.com/user-attachments/assets/20a4f424-e288-42f0-92ab-610353ef049b)
-
-#### 3. V-for에 key 사용
-
-![스크린샷 2025-02-04 오전 11 25 41](https://github.com/user-attachments/assets/58b3ecab-5b66-4d4a-b21e-de4a655b1d92)
-
-### 우선 순위 B - 강력히 권장
-
-#### 1. PROP 이름 대소문자 규칙
-
-![스크린샷 2025-02-04 오전 11 26 29](https://github.com/user-attachments/assets/72635d8e-0994-4b39-a7ed-8e25453437eb)
-
-#### 2. 템플릿의 간단한 표현 규칙
-
-![스크린샷 2025-02-04 오전 11 26 47](https://github.com/user-attachments/assets/5f4c4572-2912-4047-9884-71337af6ddc7)
 
 <br>
 
-## 🔥 트러블슈팅: 모니터 주사율에 따른 게임 속도 차이
+## 🔥 트러블슈팅
+
+### 모니터 주사율에 따른 게임 속도 차이
 
 **문제** <br/> 모니터 주사율(Hz)에 따라 게임 속도가 다르게 보이는 현상이 발생함. 프레임 기반 업데이트를 사용하여, 주사율이 높은 모니터에서 게임이 더 빠르게 실행됨.
 
