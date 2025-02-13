@@ -74,6 +74,7 @@ export default function SideMenuContainer() {
     <div className="relative">
       <button
         ref={buttonRef}
+        tabIndex={-1}
         onClick={handleClickButton}
         className="flex items-center justify-center"
         aria-label="sidebar button"

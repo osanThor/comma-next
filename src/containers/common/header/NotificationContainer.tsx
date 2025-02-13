@@ -98,6 +98,7 @@ export default function NotificationContainer() {
   return (
     <div className="relative flex items-center justify-center">
       <button
+        tabIndex={-1}
         className="relative"
         ref={buttonRef}
         onClick={handleClickButton}

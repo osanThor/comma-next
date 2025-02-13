@@ -56,7 +56,7 @@ export default function HeaderContainer() {
           <div className="flex items-center gap-4">
             {user ? (
               <>
-                <Link href={`/user/${user.id}/post`}>
+                <Link tabIndex={-1} href={`/user/${user.id}/post`}>
                   <Avatar src={user.profile_image} size="sm" />
                 </Link>
                 <NotificationContainer />
