@@ -1,6 +1,11 @@
 import LoginContainer from "@/containers/auth/LoginContainer";
+import { getMetadata } from "@/utils/getMetadata";
 import Image from "next/image";
 import Link from "next/link";
+
+export async function generateMetadata() {
+  return getMetadata({ title: "로그인" });
+}
 
 export default function page() {
   return (
