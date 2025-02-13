@@ -33,6 +33,7 @@ export default function MineSweeperContainer() {
 
   const timeOutRef = useRef<NodeJS.Timeout>(null);
   const [revealedList, setRevealedList] = useState<number[]>([]);
+  const revealedTimeRef = useRef<NodeJS.Timeout[]>([]);
 
   const [flagCount, setFlagCount] = useState(MINE_COUNT);
   const cells = useRef<Cell[]>(
@@ -60,6 +61,12 @@ export default function MineSweeperContainer() {
     if (timeOutRef.current) {
       clearTimeout(timeOutRef.current);
       timeOutRef.current = null;
+    }
+    if (revealedTimeRef.current.length) {
+      revealedTimeRef.current.forEach((val) => {
+        clearTimeout(val);
+      });
+      revealedTimeRef.current = [];
     }
 
     cells.current.splice(
@@ -106,9 +113,10 @@ export default function MineSweeperContainer() {
       .filter(({ cell }) => cell.mine);
 
     mineCells.forEach((item, i) => {
-      setTimeout(() => {
+      const revealTime = setTimeout(() => {
         setRevealedList((prev) => [...prev, item.index]);
       }, (2000 / mineCells.length) * i);
+      revealedTimeRef.current = [...revealedTimeRef.current, revealTime];
     });
   };
   const calculateAdjacentMines = () => {
