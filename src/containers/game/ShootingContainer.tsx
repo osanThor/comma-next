@@ -203,10 +203,12 @@ export default function ShootingContainer() {
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
+    event.preventDefault();
     keysDown.current[event.key] = true;
   };
 
   const handleKeyUp = (event: KeyboardEvent) => {
+    event.preventDefault();
     delete keysDown.current[event.key];
     if (event.key === " ") {
       createBullet();
