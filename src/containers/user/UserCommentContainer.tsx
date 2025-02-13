@@ -40,7 +40,7 @@ export default function UserCommentContainer({ userId }: Props) {
           작성한 댓글이 존재하지 않습니다.
         </div>
       ) : (
-        <div className="flex flex-col gap-5 pr-[70px] mb-[70px] mt-[30px]">
+        <div className="flex flex-col gap-5 mb-[70px] mt-[30px]">
           {comments?.data.map((item) => (
             <UserCommentItem key={item.id} item={item} mutate={mutate} />
           ))}
