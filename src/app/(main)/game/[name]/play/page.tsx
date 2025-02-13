@@ -5,12 +5,22 @@ import FlappyBooContainer from "@/containers/game/FlappyBooContainer";
 import MineSweeperContainer from "@/containers/game/MineSweeperContainer";
 import ShootingContainer from "@/containers/game/ShootingContainer";
 import TetrisContainer from "@/containers/game/TetrisContainer";
+import { getGameByName } from "@/services/game.service";
+import { getMetadata } from "@/utils/getMetadata";
 import { isMobileDevice } from "@/utils/isMobileDevice";
 import { JSX } from "react";
 
 type Props = {
   params: Promise<{ name: string }>;
 };
+
+export async function generateMetadata({ params }: Props) {
+  const { name: gameName } = await params;
+  const data = await getGameByName(gameName);
+  return getMetadata({
+    title: `플레이 ${data.display_name}`,
+  });
+}
 
 const GAME_CONTAINERS = {
   tetris: <TetrisContainer />,

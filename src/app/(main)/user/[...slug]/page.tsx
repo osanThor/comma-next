@@ -1,6 +1,8 @@
 import notFound from "@/app/not-found";
 import { USER_NAV_MENUS } from "@/constants/user";
 import UserRootContainer from "@/containers/user/UserRootContainer";
+import { getUserById } from "@/services/user.service";
+import { getMetadata } from "@/utils/getMetadata";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -9,6 +11,14 @@ import { twMerge } from "tailwind-merge";
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
+
+export async function generateMetadata({ params }: Props) {
+  const slug = (await params).slug;
+  const userId = slug[0];
+
+  const user = await getUserById(userId);
+  return getMetadata({ title: `플레이어 ${user.name}` });
+}
 
 export default async function UserPage({ params }: Props) {
   const slug = (await params).slug;
