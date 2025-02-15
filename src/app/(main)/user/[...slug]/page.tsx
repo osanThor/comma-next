@@ -38,7 +38,7 @@ export default async function UserPage({ params }: Props) {
                 key={menu.value}
                 href={`/user/${userId}/${menu.value}`}
                 className={twMerge(
-                  "block text-white hover:text-point-500 py-4 md:py-0 md:text-xl font-bold transition-all",
+                  "block text-white hover:text-point-500 py-4 md:py-0 text-sm md:text-xl font-bold transition-all",
                   path === menu.value && "text-point-500"
                 )}
               >

@@ -18,7 +18,7 @@ export default function UserCommentContainer({ userId }: Props) {
   return (
     <>
       <div className="flex max-w-[1000px] items-end justify-between mb-[30px]">
-        <div className="text-white text-2xl font-semibold pt-1 leading-4">
+        <div className="text-white text-xl md:text-2xl font-semibold pt-1 leading-4">
           댓글
           <span className="ml-1">{comments ? comments?.totalCount : 0}</span>개
         </div>

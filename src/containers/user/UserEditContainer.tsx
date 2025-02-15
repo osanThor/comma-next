@@ -143,14 +143,14 @@ export default function UserEditContainer() {
           <h2 className="text-white font-dnf text-3xl md:text-5xl">PROFILE</h2>
           <label
             htmlFor="name"
-            className="text-white text-xl block font-bold mt-12"
+            className="text-white text-sm md:text-xl block font-bold mt-12"
           >
             닉네임
           </label>
           <input
             id="name"
             type="text"
-            className="w-full max-w-[624px] h-[56px] rounded-[12px] px-7 mt-2.5 text-lg font-medium text-[#2E2E2E]"
+            className="w-full max-w-[624px] h-[56px] rounded-[12px] px-4 md:px-7 mt-2.5 md:text-lg font-medium text-[#2E2E2E]"
             placeholder="닉네임을 입력해주세요."
             name="name"
             value={name || ""}
@@ -159,28 +159,28 @@ export default function UserEditContainer() {
 
           <label
             htmlFor="email"
-            className="text-white text-xl block font-bold mt-[29px]"
+            className="text-white text-sm md:text-xl block font-bold mt-[29px]"
           >
             이메일
           </label>
           <input
             id="email"
             type="text"
-            className="w-full max-w-[624px] h-[56px] rounded-[12px] px-7 mt-2.5 text-lg font-medium text-white/20"
+            className="w-full max-w-[624px] h-[56px] rounded-[12px] px-4 md:px-7 mt-2.5 md:text-lg font-medium text-white/20"
             name="email"
             disabled
             value={email}
           />
           <label
             htmlFor="bio"
-            className="text-white text-xl block font-bold mt-[29px]"
+            className="text-white text-sm md:text-xl block font-bold mt-[29px]"
           >
             자기소개
           </label>
           <div className="flex flex-col">
             <textarea
               id="bio"
-              className="w-full max-w-[624px] h-32 rounded-[12px] py-5 px-6 resize-none mt-2.5 text-lg font-medium text-[#2E2E2E]"
+              className="w-full max-w-[624px] h-32 rounded-[12px] py-5 px-6 resize-none mt-2.5 md:text-lg font-medium text-[#2E2E2E]"
               placeholder="아직 자기소개를 작성하지 않으셨습니다. 자기소개를 작성해주세요."
               name="bio"
               maxLength={150}
