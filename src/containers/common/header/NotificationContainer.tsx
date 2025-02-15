@@ -123,7 +123,7 @@ export default function NotificationContainer() {
         <div
           ref={menuRef}
           id="alarm-dropdown"
-          className="absolute bg-white w-[calc(100vw-40px)] max-w-[440px] top-full translate-y-6 right-0 min-w-[180px] rounded-2xl flex flex-col items-center px-10 py-8 shadow-md"
+          className="fixed md:absolute bg-white w-[calc(100vw-54px)] md:w-[calc(100vw-40px)] max-w-[440px] right-5 top-20 md:top-full md:translate-y-6 md:right-0 min-w-[180px] rounded-2xl flex flex-col items-center px-5 md:px-10 py-4 md:py-8 shadow-md"
         >
           <div className="w-full flex justify-between items-center mb-5">
             <div className="flex items-center gap-4 text-main-500 font-bold">
