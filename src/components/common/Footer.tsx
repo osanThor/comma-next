@@ -28,7 +28,7 @@ export default function Footer() {
     <footer className="w-full max-w-[100vw] bg-main-700/10 mt-20">
       <div className="max-w-7xl mx-auto px-8">
         <div className="py-8">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center flex-col gap-4 md:flex-row">
             <div className="opacity-80 hover:opacity-100 transition-opacity">
               <Image
                 src="/assets/images/logo.png"
@@ -38,7 +38,7 @@ export default function Footer() {
                 height={16}
               />
             </div>
-            <div className="flex flex-wrap items-center pl-8">
+            <div className="flex flex-wrap items-center justify-center md:pl-8">
               {MEMBERS.map((member) => (
                 <Link
                   href={member.github}

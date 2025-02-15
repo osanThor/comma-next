@@ -49,12 +49,12 @@ export default function UserCommentItem({ item, mutate }: Props) {
     <div className="w-full max-w-[1000px] relative group">
       <Link
         href={`/post/${item.post_id}`}
-        className="min-h-[70px] w-full rounded-2xl py-4 bg-main-600 flex items-start flex-col lg:flex-row flex-wrap lg:items-center px-[33px]"
+        className="min-h-[70px] w-full rounded-2xl py-4 bg-main-600 flex items-start flex-col lg:flex-row flex-wrap lg:items-center px-4 md:px-[33px]"
       >
         <div className="min-w-[200px] flex-1 text-white text-base font-dnf max-w-32 truncate mr-10">
           {item.post.title}
         </div>
-        <div className="flex-[1.8] text-white/70 text-base font-medium lg:max-w-[612px] truncate pr-8">
+        <div className="flex-[1.8] text-white/70 text-base font-medium w-full line-clamp-1 md:pr-8 ">
           {item.content}
         </div>
         <div className="flex-1 flex flex-wrap items-center gap-2">

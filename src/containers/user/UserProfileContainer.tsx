@@ -60,15 +60,17 @@ export default function UserProfileContainer({ user, userId }: Props) {
       </div>
       <div className="flex flex-col items-center sm:items-start">
         <div className="flex flex-col sm:flex-row flex-wrap">
-          <h2 className="text-white font-bold font-dnf text-[30px] text-center sm:text-left mt-4 sm:mt-0 sm:mr-[8px]">
+          <h2 className="text-white font-bold font-dnf text-2xl md:text-[30px] text-center sm:text-left mt-4 sm:mt-0 sm:mr-[8px]">
             {user ? user.name : <div className="w-[90px] h-10 skeleton" />}
           </h2>
           <span className="text-gray-400 self-end mb-1 text-sm">
             {user ? user.email : <div className="w-[120px] h-5 skeleton" />}
           </span>
         </div>
-        <h2 className="text-gray-300 text-[16px] h-8 mt-[5px] mb-3">{bio}</h2>
-        <div className="mt-2 bg-point-500/40 text-white min-h-[38px] px-3.5 py-1 rounded-xl text-base font-semibold flex items-center justify-center text-center">
+        <h2 className="text-gray-300 text-[16px] min-h-8 mt-[5px] mb-5 md:mb-3 text-center sm:text-left break-keep">
+          {bio}
+        </h2>
+        <div className="mt-2 bg-point-500/40 text-white min-h-[38px] px-3.5 py-1 rounded-xl text-sm md:text-base font-semibold flex items-center justify-center text-center">
           총 플레이 시간 | {formatedTime(playTime)}
         </div>
       </div>

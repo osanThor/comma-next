@@ -101,7 +101,7 @@ export default function PostCommentItem({ item, postId }: Props) {
     <li className="flex flex-row items-center justify-between w-full">
       <div className="flex flex-row items-start gap-4">
         <div className="pt-2">
-          <Link href={"/"}>
+          <Link href={`/user/${item.user.id}/post`}>
             <Avatar src={item.user.profile_image} />
           </Link>
         </div>
