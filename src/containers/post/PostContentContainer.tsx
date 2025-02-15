@@ -43,7 +43,7 @@ export default function PostContentContainer({ post }: Props) {
   };
 
   return (
-    <div className="w-full flex flex-col flex-grow">
+    <div className="w-full flex flex-col flex-grow ">
       <div className="flex flex-row items-end justify-between w-full">
         <div className="flex-grow">
           <p className="font-medium text-sm text-white/70 mb-2">
@@ -79,7 +79,7 @@ export default function PostContentContainer({ post }: Props) {
           </div>
         )}
         <div className="flex-grow lg:max-h-[275px] lg:overflow-y-auto">
-          <p className="font-medium opacity-85 whitespace-pre-wrap">
+          <p className="font-medium min-h-20 opacity-85 whitespace-pre-wrap">
             {post.content}
           </p>
         </div>
