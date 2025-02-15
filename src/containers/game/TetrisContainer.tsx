@@ -23,12 +23,11 @@ export default function TetrisContainer() {
 
   const { currentTime, start, stop, reset } = useTimer();
 
-  const [account, setAccount] = useState({ score: 0, level: 0, lines: 0 });
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
-  const accountRef = useRef(account);
+  const accountRef = useRef({ score: 0, level: 0, lines: 0 });
 
   const requestId = useRef<number>(null);
   const time = useRef({
@@ -74,12 +73,10 @@ export default function TetrisContainer() {
         } else {
           return;
         }
-
+        let point = 0;
         while (board.current.valid(p)) {
-          setAccount((prev) => ({
-            ...prev,
-            score: prev.score + POINTS.SOFT_DROP,
-          }));
+          accountRef.current.score =
+            accountRef.current.score + POINTS.HARD_DROP;
           board.current.piece.move(p);
           p = moves[KEY.DOWN](board.current.piece) as Piece;
         }
@@ -90,26 +87,24 @@ export default function TetrisContainer() {
         }
         board.current.piece.move(p);
         if (event.keyCode === KEY.DOWN && isPlaying) {
-          setAccount((prev) => ({
-            ...prev,
-            score: prev.score + POINTS.SOFT_DROP,
-          }));
+          accountRef.current.score =
+            accountRef.current.score + POINTS.SOFT_DROP;
         }
       }
     }
   };
 
   const resetGame = () => {
-    setAccount({
+    accountRef.current = {
       score: 0,
       lines: 0,
       level: 0,
-    });
+    };
     if (board.current) board.current.reset();
     time.current = {
       start: performance.now(),
       elapsed: 0,
-      level: LEVEL[account.level],
+      level: LEVEL[accountRef.current.level],
     };
     reset();
   };
@@ -126,7 +121,6 @@ export default function TetrisContainer() {
     animate();
     setIsPlaying(true);
     setIsGameOver(false);
-    document.addEventListener("keydown", handleKeyPress);
     if (isPaused) setIsPaused(false);
     if (backgroundSound.current) backgroundSound.current.play();
     start();
@@ -160,15 +154,7 @@ export default function TetrisContainer() {
     time.current.elapsed = now - time.current.start;
     if (time.current.elapsed > time.current.level) {
       time.current.start = now;
-      if (
-        !board.current.drop(
-          moves,
-          accountRef.current,
-          setAccount,
-          time,
-          pointsSound.current
-        )
-      ) {
+      if (!board.current.drop(moves, accountRef, time, pointsSound.current)) {
         gameOver();
         return;
       }
@@ -263,15 +249,14 @@ export default function TetrisContainer() {
   }, []);
 
   useEffect(() => {
-    accountRef.current = account;
-  }, [account]);
-
-  useEffect(() => {
     if (isGameOver) {
-      console.log("gameOver", account.score, currentTime);
-      updateGamePayload({ score: account.score, playTime: currentTime });
+      console.log("gameOver", accountRef.current.score, currentTime);
+      updateGamePayload({
+        score: accountRef.current.score,
+        playTime: currentTime,
+      });
     }
-  }, [isGameOver, account, currentTime]);
+  }, [isGameOver, accountRef, currentTime]);
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyPress);
@@ -294,19 +279,19 @@ export default function TetrisContainer() {
             <p>
               Score:
               <span id="score" className="bg-main-500/80 p-1 rounded-lg">
-                {account.score}
+                {accountRef.current.score}
               </span>
             </p>
             <p>
               Lines:
               <span id="lines" className="bg-main-500/80 p-1 rounded-lg">
-                {account.lines}
+                {accountRef.current.lines}
               </span>
             </p>
             <p>
               Level:
               <span id="level" className="bg-main-500/80 p-1 rounded-lg">
-                {account.level}
+                {accountRef.current.level}
               </span>
             </p>
             <p>
