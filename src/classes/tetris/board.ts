@@ -10,6 +10,7 @@ import {
   ROTATION,
 } from "@/constants/tetris";
 import Piece from "./piece";
+import { RefObject } from "react";
 
 // Type Definitions
 type Account = {
@@ -72,14 +73,7 @@ export default class Board {
     moves: {
       [x: number]: (p: Piece) => Piece;
     },
-    account: Account,
-    setAccount: React.Dispatch<
-      React.SetStateAction<{
-        score: number;
-        level: number;
-        lines: number;
-      }>
-    >,
+    account: RefObject<Account>,
     time: Time,
     pointsSound: HTMLAudioElement
   ): boolean {
@@ -88,7 +82,7 @@ export default class Board {
       this.piece.move(p);
     } else {
       this.freeze();
-      this.clearLines(account, setAccount, time, pointsSound);
+      this.clearLines(account, time, pointsSound);
       if (this.piece.y === 0) {
         return false;
       }
@@ -101,14 +95,7 @@ export default class Board {
   }
 
   clearLines(
-    account: Account,
-    setAccount: React.Dispatch<
-      React.SetStateAction<{
-        score: number;
-        level: number;
-        lines: number;
-      }>
-    >,
+    account: RefObject<Account>,
     time: Time,
     pointsSound: HTMLAudioElement
   ): void {
@@ -123,22 +110,15 @@ export default class Board {
     });
 
     if (lines > 0) {
-      setAccount((prev) => ({
-        ...prev,
-        score:
-          prev.score + this.getLinesClearedPoints(lines, account, pointsSound),
-        lines: prev.lines + lines,
-      }));
-
-      if (account.lines >= LINES_PER_LEVEL) {
-        setAccount((prev) => {
-          return {
-            ...prev,
-            level: prev.level + 1,
-            lines: prev.lines - LINES_PER_LEVEL,
-          };
-        });
-        time.current.level = LEVEL[account.level];
+      (account.current.score =
+        account.current.score +
+        this.getLinesClearedPoints(lines, account.current, pointsSound)),
+        (account.current.lines = account.current.lines + lines);
+      console.log(account.current);
+      if (account.current.lines >= LINES_PER_LEVEL) {
+        account.current.level = account.current.level + 1;
+        (account.current.lines = account.current.lines - LINES_PER_LEVEL),
+          (time.current.level = LEVEL[account.current.level + 1]);
       }
     }
   }
@@ -259,7 +239,16 @@ export default class Board {
     account: Account,
     pointsSound: HTMLAudioElement
   ): number {
-    const lineClearPoints = POINTS[lines] || 0;
+    const lineClearPoints =
+      lines === 1
+        ? POINTS.SINGLE
+        : lines === 2
+        ? POINTS.DOUBLE
+        : lines === 3
+        ? POINTS.TRIPLE
+        : lines === 4
+        ? POINTS.TETRIS
+        : 0;
     pointsSound.play();
     return (account.level + 1) * lineClearPoints;
   }

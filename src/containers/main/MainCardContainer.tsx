@@ -28,6 +28,7 @@ const DISPLAY_NAME = {
 
 export default function MainCardContainer() {
   const games = useGameStore((state) => state.games);
+  const getGamesData = useGameStore((state) => state.getGamesData);
 
   const swiperRef = useRef<SwiperType>(null);
   const [activeIndex, setActiveIndex] = useState(INITIAL_INDEX);
@@ -36,6 +37,10 @@ export default function MainCardContainer() {
 
   const calculateOffset = (idx: number) => Math.abs(idx - activeIndex);
   const isNegativeOffset = (idx: number) => idx - activeIndex < 0;
+
+  const handleGetGameData = async () => {
+    await getGamesData();
+  };
 
   const handleSwiperInit = (swiper: SwiperType) => {
     swiperRef.current = swiper;
@@ -105,6 +110,10 @@ export default function MainCardContainer() {
       setTargetIdx(null);
     }
   };
+
+  useEffect(() => {
+    handleGetGameData();
+  }, []);
 
   useEffect(() => {
     if (targetIdx !== null) {
