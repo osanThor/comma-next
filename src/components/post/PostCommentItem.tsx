@@ -91,7 +91,11 @@ export default function PostCommentItem({ item, postId }: Props) {
         setDisabled(false);
       }
     };
-    if (user) handleCheckLike(user.id);
+    if (user) {
+      handleCheckLike(user.id);
+    } else {
+      setDisabled(false);
+    }
   }, [user]);
   return (
     <li className="flex flex-row items-center justify-between w-full">

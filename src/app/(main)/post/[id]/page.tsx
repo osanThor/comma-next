@@ -1,3 +1,4 @@
+import Avatar from "@/components/common/Avatar";
 import Footer from "@/components/common/Footer";
 import PostCommentsContainer from "@/containers/post/PostCommentsContainer";
 import PostContentContainer from "@/containers/post/PostContentContainer";
@@ -33,15 +34,13 @@ export default async function PostDetailPage({ params }: Props) {
                   href={`/user/${data?.user?.id}/post`}
                   className="flex flex-row items-center gap-2 cursor-pointer bg-main-500/30 transition-all hover:bg-main-500/50 pl-4 pr-5 py-2 rounded-full"
                 >
-                  <div className="w-6 h-6 rounded-full">
-                    <img
-                      className="w-full h-full object-cover object-center rounded-full"
-                      src={
-                        data?.user?.profile_image ||
-                        "/assets/images/defaultProfile.png"
-                      }
-                    />
-                  </div>
+                  <Avatar
+                    src={
+                      data?.user?.profile_image ||
+                      "/assets/images/defaultProfile.png"
+                    }
+                    size="sm"
+                  />
                   <p className="text-lg font-medium opacity-9 pt-[1px]">
                     {data?.user?.name || "알 수 없음"}
                   </p>

@@ -110,15 +110,16 @@ export default class Board {
     });
 
     if (lines > 0) {
-      (account.current.score =
+      account.current.score =
         account.current.score +
-        this.getLinesClearedPoints(lines, account.current, pointsSound)),
-        (account.current.lines = account.current.lines + lines);
+        this.getLinesClearedPoints(lines, account.current, pointsSound);
+      account.current.lines = account.current.lines + lines;
       console.log(account.current);
       if (account.current.lines >= LINES_PER_LEVEL) {
         account.current.level = account.current.level + 1;
-        (account.current.lines = account.current.lines - LINES_PER_LEVEL),
-          (time.current.level = LEVEL[account.current.level + 1]);
+
+        account.current.lines = account.current.lines - LINES_PER_LEVEL;
+        time.current.level = LEVEL[account.current.level + 1];
       }
     }
   }

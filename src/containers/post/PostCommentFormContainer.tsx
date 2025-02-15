@@ -22,7 +22,7 @@ export default function PostCommentFormContainer({
   const [content, setContetn] = useState<string>("");
 
   const handleAddComment = async () => {
-    if (!user) return;
+    if (!user) return addToast("로그인 해주세요.", "error");
     const result = await addComment({
       userId: user.id,
       postId,

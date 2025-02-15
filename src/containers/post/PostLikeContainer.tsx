@@ -33,6 +33,7 @@ export default function PostLikeContainer({ post }: Props) {
       setIsLiked(false);
     }
   };
+
   const handlelike = async (body: InLikeBody) => {
     const result = await addLike(body);
     if (result) {
@@ -88,7 +89,11 @@ export default function PostLikeContainer({ post }: Props) {
         setDisabled(false);
       }
     };
-    if (user) handleCheckLike(user.id);
+    if (user) {
+      handleCheckLike(user.id);
+    } else {
+      setDisabled(false);
+    }
   }, [user]);
   return (
     <button

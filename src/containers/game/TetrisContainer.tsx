@@ -73,7 +73,6 @@ export default function TetrisContainer() {
         } else {
           return;
         }
-        let point = 0;
         while (board.current.valid(p)) {
           accountRef.current.score =
             accountRef.current.score + POINTS.HARD_DROP;
