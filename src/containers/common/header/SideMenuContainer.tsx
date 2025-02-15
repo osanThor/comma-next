@@ -38,9 +38,14 @@ export default function SideMenuContainer() {
   }
 
   const handleLogout = async () => {
-    await logout();
-    addToast("다시 돌아오실거죠...?", "error");
-    router.push("/login");
+    try {
+      await logout();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      addToast("다시 돌아오실거죠...?", "error");
+      router.push("/login");
+    }
   };
 
   const handleClickLogout = () => {
