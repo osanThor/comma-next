@@ -1,5 +1,6 @@
 import LogoutIcon from "@/components/common/icons/LogoutIcon";
 import { logout } from "@/services/user.service";
+import { useAuthStore } from "@/stores/authStore";
 import { useGameStore } from "@/stores/gameStore";
 import { useModalStore } from "@/stores/modalStore";
 import { useToastStore } from "@/stores/toastStore";
@@ -11,6 +12,7 @@ import { twMerge } from "tailwind-merge";
 export default function SideMenuContainer() {
   const router = useRouter();
 
+  const updateUser = useAuthStore((state) => state.updateUser);
   const addToast = useToastStore((state) => state.addToast);
   const games = useGameStore((state) => state.games);
   const getGamesData = useGameStore((state) => state.getGamesData);
@@ -38,9 +40,15 @@ export default function SideMenuContainer() {
   }
 
   const handleLogout = async () => {
-    await logout();
-    addToast("다시 돌아오실거죠...?", "error");
-    router.push("/login");
+    try {
+      await logout();
+    } catch (err) {
+      console.error(err);
+      updateUser(null);
+    } finally {
+      addToast("다시 돌아오실거죠...?", "error");
+      router.push("/login");
+    }
   };
 
   const handleClickLogout = () => {
