@@ -9,8 +9,9 @@
 
 ![Thumbnail](https://github.com/user-attachments/assets/b0a56a57-818f-4b4a-9b88-ae4729d90d02)
 
-- 프로젝트 기간 : 2025-01-13 ~ 2025-02-04
-- 배포 URL : https://comma-one.vercel.app/
+- 배포 URL : https://comma.given-log.com
+- `Vue.js` 프로젝트 `Next.JS`와 `Typescript`로 마이그레이션
+- 이전 팀 프로젝트 README : https://github.com/osanThor/Comma
 
 <br>
 
@@ -22,32 +23,24 @@
 - 게임을 통해 사용자 간 소셜 연결을 지원하며, 공통된 관심사를 기반으로 한 커뮤니티 형성을 돕습니다.
 - 단순한 게임 플랫폼을 넘어 사람들과 교류하며 즐거움을 공유할 수 있는 공간을 제공합니다.
 
+
 <br>
 
 ## ⚙️ 기술 스택
 
 ![npm](https://img.shields.io/badge/npm-10.8.3-%23CB3837?logo=npm)
-![vue](https://img.shields.io/badge/vue-3.5.13-%234FC08D?logo=vuedotjs)
+![next](https://img.shields.io/badge/next-3.5.13-%23000000?logo=nextdotjs)
+![typescript](https://img.shields.io/badge/typescript-5-%233178C6?logo=typescript)
 ![tailwind](https://img.shields.io/badge/tailwind-3.4.17-%2306B6D4?logo=tailwindcss)
 
 **라이브러리**  
 ![supabase](https://img.shields.io/badge/supabase-2.6.0-%233FCF8E?logo=supabase)
 ![tailwind-merge](https://img.shields.io/badge/tailwind%20merge-2.6.0-%2306B6D4?logo=tailwindcss)
-![lodash](https://img.shields.io/badge/lodash-4.17.21-%233492FF?logo=lodash)
 ![swiper](https://img.shields.io/badge/swiper-11.1.15-%23104E8B?logo=swiper)
 
 **협업툴**  
 [![My Skills](https://skillicons.dev/icons?i=supabase,figma,github,notion&theme=light)](https://skillicons.dev)
 
-<br>
-
-## 🧑🏻‍💻👩🏻‍💻 구성원
-
-|                                                 Frontend                                                  |                                    Frontend                                     |                                                         Frontend                                                         |                                                 Frontend                                                  |                                    Frontend                                    |
-| :-------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
-| <img src="https://github.com/user-attachments/assets/ecfdea20-5919-4044-af7b-d034f8e01ce7"  width="100"/> | <img src="https://avatars.githubusercontent.com/u/165476198?v=4"  width="100"/> | <img src='https://avatars.githubusercontent.com/u/48465276?v=4,gjwjdals96,,https://github.com/gjwjdals96'  width="100"/> | <img src="https://github.com/user-attachments/assets/6a5fcc77-a8c9-488a-8a01-3f23cccdf813"  width="100"/> | <img src="https://avatars.githubusercontent.com/u/57696567?v=4"  width="100"/> |
-|                                                  이준영                                                   |                                     최보아                                      |                                                          허정민                                                          |                                                  박지운                                                   |                                     우정완                                     |
-|                                 [@osanThor](https://github.com/osanThor)                                  |                  [@swallowedB](https://github.com/swallowedB)                   |                                       [@gjwjdals96](https://github.com/gjwjdals96)                                       |                                   [@uoomif](https://github.com/uoomif)                                    |                   [@WJoungWan](https://github.com/WJoungWan)                   |
 
 <br/>
 
@@ -64,91 +57,29 @@
 
 <br/>
 
-## 🗂️ 폴더 구조
+## 🔨 업그레이드
 
-    📦programmers-fb
-    ┣ 📂public
-    ┃ ┣ 📂assets
-    ┃ ┃ ┣ 📂fonts
-    ┃ ┃ ┣ 📂images
-    ┃ ┃ ┃ ┣ 📂banner
-    ┃ ┃ ┃ ┣ 📂bg
-    ┃ ┃ ┃ ┃ ┗ 📂main
-    ┃ ┃ ┃ ┣ 📂game
-    ┃ ┃ ┃ ┃ ┣ 📂bounceBall
-    ┃ ┃ ┃ ┃ ┣ 📂flappy
-    ┃ ┃ ┃ ┃ ┣ 📂profile
-    ┃ ┃ ┃ ┃ ┣ 📂shooting
-    ┃ ┃ ┃ ┃ ┗ 📂tetris
-    ┃ ┃ ┃ ┣ 📂icons
-    ┃ ┃ ┃ ┗ 📂login
-    ┃ ┗ ┗ 📂sounds
-    ┣ 📂src
-    ┃ ┣ 📂classes
-    ┃ ┃ ┣ 📂flappy
-    ┃ ┃ ┣ 📂shooting
-    ┃ ┃ ┗ 📂tetris
-    ┃ ┣ 📂components
-    ┃ ┃ ┣ 📂common
-    ┃ ┃ ┃ ┗ 📂icons
-    ┃ ┃ ┣ 📂game
-    ┃ ┃ ┣ 📂game-over
-    ┃ ┃ ┣ 📂game-view
-    ┃ ┃ ┣ 📂main
-    ┃ ┃ ┣ 📂post-detail
-    ┃ ┃ ┣ 📂post-edit
-    ┃ ┃ ┗ 📂user
-    ┃ ┣ 📂constants
-    ┃ ┣ 📂hooks
-    ┃ ┣ 📂layouts
-    ┃ ┣ 📂lib
-    ┃ ┃ ┗ 📂supabase
-    ┃ ┣ 📂router
-    ┃ ┣ 📂services
-    ┃ ┣ 📂stores
-    ┃ ┣ 📂styles
-    ┗ ┗ 📂views
+### SEO 최적화
 
-<br/>
+Next.js의 SSR(Server Side Rendering)과 SSG(Static Site Generation)를 활용하여 SEO 최적화를 진행.
+또한 Next.js의 Metadata API를 통해 Open Graph 및 Twitter Card와 같은 소셜 미디어 메타 태그를 정교하게 설정함으로써 SNS 공유 시 썸네일, 제목, 설명 등 콘텐츠 미리보기 정보를 정확하고 풍부하게 제공하여 콘텐츠 확산성과 접근성을 극대화
 
-## ✏️ 코드 스타일
+### 커스텀 Hook 사용을 통한 중복 로직 최적화
 
-콤마(Comma)는 VUE 코드 스타일 가이드를 준수하여 개발하였습니다.
+API 호출, 데이터 패칭과 같이 반복되는 로직을 커스텀 Hook으로 분리하여 코드 중복을 제거하고 재사용성 증대.
+자주 사용되는 상태 관리와 이벤트 처리 로직을 커스텀 Hook으로 추상화하여 상태 흐름의 명확성 향상, 컴포넌트 내부를 더욱 간결하고 유지보수하기 쉽게 개선
 
-### 우선 순위 A - 필수
+### 접근성 강화
 
-#### 1. 멀티 워드 컴포넌트 이름
+기존 프로젝트의 Vue Router beforeEach를 활용한 무조건적인 인증보안 대신 로그인이 필요한 서비스와 불필요한 서비스를 분리하여 사용자 접근성을 증가.
+전역 상태관리 라이브러리 zustand를 활용하여 사용자 인증 접근에 대해 구별하고 zustand 플러그인 persist를 활용해 사용자 경험 개선.   
 
-```vue
-<template>
-  <main-card-section></main-card-section>
-  <main-game-community-section></main-game-community-section>
-  <main-community-section></main-community-section>
-  <base-footer></base-footer>
-</template>
-```
-
-#### 2. 상세한 PROP 정의 사용
-
-![스크린샷 2025-02-04 오전 11 24 47](https://github.com/user-attachments/assets/20a4f424-e288-42f0-92ab-610353ef049b)
-
-#### 3. V-for에 key 사용
-
-![스크린샷 2025-02-04 오전 11 25 41](https://github.com/user-attachments/assets/58b3ecab-5b66-4d4a-b21e-de4a655b1d92)
-
-### 우선 순위 B - 강력히 권장
-
-#### 1. PROP 이름 대소문자 규칙
-
-![스크린샷 2025-02-04 오전 11 26 29](https://github.com/user-attachments/assets/72635d8e-0994-4b39-a7ed-8e25453437eb)
-
-#### 2. 템플릿의 간단한 표현 규칙
-
-![스크린샷 2025-02-04 오전 11 26 47](https://github.com/user-attachments/assets/5f4c4572-2912-4047-9884-71337af6ddc7)
 
 <br>
 
-## 🔥 트러블슈팅: 모니터 주사율에 따른 게임 속도 차이
+## 🔥 트러블슈팅
+
+### 모니터 주사율에 따른 게임 속도 차이
 
 **문제** <br/> 모니터 주사율(Hz)에 따라 게임 속도가 다르게 보이는 현상이 발생함. 프레임 기반 업데이트를 사용하여, 주사율이 높은 모니터에서 게임이 더 빠르게 실행됨.
 
@@ -182,3 +113,11 @@ function main(timestamp) {
   }
 }
 ```
+
+### Vue와 React의 다른 생명주기 및 반응형(reactive) 상태관리
+
+Vue의 Options API 기반 생명주기(beforeCreate, created, mounted 등)를 React의 함수형 컴포넌트와 useEffect로 전환하여 생명주기 로직을 명시적이고 직관적으로 관리.
+
+Vue의 반응형 상태(ref, reactive) 관리를 React의 `useState`와 `useRef`로 변환하여 상태를 명시적으로 관리하고 렌더링 여부를 명확히 제어할 수 있도록 개선.
+`useState`를 통해 상태가 변경될 때만 명확히 재렌더링을 유도하고, `useRef`로 렌더링과 무관한 값들을 관리해 불필요한 반응성을 최소화
+
