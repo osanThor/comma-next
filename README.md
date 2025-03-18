@@ -57,80 +57,22 @@
 
 <br/>
 
-## 🗂️ 폴더 구조
-  
-    📦comma
-     ┣ 📂public
-     ┃ ┣ 📂assets
-     ┃ ┃ ┣ 📂fonts
-     ┃ ┃ ┣ 📂images
-     ┃ ┃ ┃ ┣ 📂banner
-     ┃ ┃ ┃ ┣ 📂bg
-     ┃ ┃ ┃ ┃ ┗ 📂main
-     ┃ ┃ ┃ ┣ 📂game
-     ┃ ┃ ┃ ┃ ┣ 📂bounceBall
-     ┃ ┃ ┃ ┃ ┣ 📂flappy
-     ┃ ┃ ┃ ┃ ┣ 📂profile
-     ┃ ┃ ┃ ┃ ┣ 📂shooting
-     ┃ ┃ ┃ ┃ ┗ 📂tetris
-     ┃ ┃ ┃ ┣ 📂icons
-     ┃ ┃ ┃ ┗ 📂login
-     ┃ ┃ ┗ 📂sounds
-     ┃ ┗ 📂meta
-     ┗ 📂src
-       ┣ 📂app
-       ┃ ┣ 📂(auth)
-       ┃ ┃ ┗ 📂login
-       ┃ ┣ 📂(main)
-       ┃ ┃ ┣ 📂game
-       ┃ ┃ ┃ ┗ 📂[name]
-       ┃ ┃ ┃   ┗ 📂play
-       ┃ ┃ ┣ 📂post
-       ┃ ┃ ┃ ┣ 📂[id]
-       ┃ ┃ ┃ ┃ ┗ 📂edit
-       ┃ ┃ ┃ ┗ 📂write
-       ┃ ┃ ┣ 📂user
-       ┃ ┃ ┃ ┣ 📂[...slug]
-       ┃ ┃ ┃ ┗ 📂edit
-       ┣ 📂classes
-       ┃ ┣ 📂flappy
-       ┃ ┣ 📂shooting
-       ┃ ┗ 📂tetris
-       ┣ 📂components
-       ┃ ┣ 📂common
-       ┃ ┃ ┗ 📂icons
-       ┃ ┣ 📂game
-       ┃ ┣ 📂post
-       ┃ ┣ 📂post-editor
-       ┃ ┗ 📂user
-       ┣ 📂constants
-       ┣ 📂containers
-       ┃ ┣ 📂auth
-       ┃ ┣ 📂common
-       ┃ ┃ ┗ 📂header
-       ┃ ┣ 📂game
-       ┃ ┣ 📂game-over
-       ┃ ┣ 📂game-view
-       ┃ ┣ 📂main
-       ┃ ┣ 📂post
-       ┃ ┣ 📂post-editor
-       ┃ ┗ 📂user
-       ┣ 📂contexts
-       ┣ 📂hooks
-       ┣ 📂layouts
-       ┣ 📂lib
-       ┃ ┗ 📂supabase
-       ┣ 📂services
-       ┣ 📂stores
-       ┣ 📂types
-       ┗ 📂utils
-
-<br/>
-
 ## 🔨 업그레이드
 
-### SEO 
+### SEO 최적화
 
+Next.js의 SSR(Server Side Rendering)과 SSG(Static Site Generation)를 활용하여 SEO 최적화를 진행.
+또한 Next.js의 Metadata API를 통해 Open Graph 및 Twitter Card와 같은 소셜 미디어 메타 태그를 정교하게 설정함으로써 SNS 공유 시 썸네일, 제목, 설명 등 콘텐츠 미리보기 정보를 정확하고 풍부하게 제공하여 콘텐츠 확산성과 접근성을 극대화
+
+### 커스텀 Hook 사용을 통한 중복 로직 최적화
+
+API 호출, 데이터 패칭과 같이 반복되는 로직을 커스텀 Hook으로 분리하여 코드 중복을 제거하고 재사용성 증대.
+자주 사용되는 상태 관리와 이벤트 처리 로직을 커스텀 Hook으로 추상화하여 상태 흐름의 명확성 향상, 컴포넌트 내부를 더욱 간결하고 유지보수하기 쉽게 개선
+
+### 접근성 강화
+
+기존 프로젝트의 Vue Router beforeEach를 활용한 무조건적인 인증보안 대신 로그인이 필요한 서비스와 불필요한 서비스를 분리하여 사용자 접근성을 증가.
+전역 상태관리 라이브러리 zustand를 활용하여 사용자 인증 접근에 대해 구별하고 zustand 플러그인 persist를 활용해 사용자 경험 개선.   
 
 
 <br>
@@ -171,3 +113,11 @@ function main(timestamp) {
   }
 }
 ```
+
+### Vue와 React의 다른 생명주기 및 반응형(reactive) 상태관리
+
+Vue의 Options API 기반 생명주기(beforeCreate, created, mounted 등)를 React의 함수형 컴포넌트와 useEffect로 전환하여 생명주기 로직을 명시적이고 직관적으로 관리.
+
+Vue의 반응형 상태(ref, reactive) 관리를 React의 `useState`와 `useRef`로 변환하여 상태를 명시적으로 관리하고 렌더링 여부를 명확히 제어할 수 있도록 개선.
+`useState`를 통해 상태가 변경될 때만 명확히 재렌더링을 유도하고, `useRef`로 렌더링과 무관한 값들을 관리해 불필요한 반응성을 최소화
+
