@@ -31,8 +31,8 @@ export default function UserEditContainer() {
   const handleCancel = () => {
     if (user) router.push(`/user/${user.id}/post`);
   };
-  const updateCharCount = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCharCount(e.target.value.length);
+  const updateCharCount = (e: React.InputEvent<HTMLTextAreaElement>) => {
+    setCharCount((e.target as HTMLTextAreaElement).value.length);
   };
 
   const handleClickFile = async () => {
